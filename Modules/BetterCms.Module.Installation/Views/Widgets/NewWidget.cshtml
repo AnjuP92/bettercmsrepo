@@ -1,0 +1,59 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+<style>
+    .gutter-10.row {
+        margin-right: -5px;
+        margin-left: -5px;
+        background-color:red;
+    }
+
+    .gutter-10 > [class^="col-"], .gutter-10 > [class^=" col-"] {
+        padding-right: 5px;
+        padding-left: 5px;
+        background-color:red;
+    }
+</style>
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type=""></script>
+<script src="~/file/bcms-installation/scripts/new.js"></script>*@
+@if (Model != null)
+{
+
+    <h2>@Model.Widget.Name</h2>
+    var divcount = "";
+    var text = "";
+   
+     @if (Model.Options != null)
+     {
+         divcount = Model.Options[0].Value;
+         text = Model.Options[1].Value;
+         
+         <div class="container">
+            <div class="row gutter-10">
+               @for (var count = 0; count < Convert.ToInt32(divcount); count++)
+                      {
+                       <div class="myclass" style="background-color:lavender;border:1px solid black;" >
+                          <img src="/file/bcms-installation/content/styles/images/banner_img.jpg" style="height:200px;width:100%;" />
+                          <h3>@text</h3>
+
+                       </div>
+                       }
+
+            </div>
+         </div>
+     }
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type=""></script>
+<script type = "text/javascript" >
+   
+    $(document).ready(function () {
+        
+       
+       var count = @Model.Options[0].Value;        
+       var value = 12 / count;       
+        $(".myclass").each(function () {
+            $(this).addClass("col-sm-" + value);
+
+        });
+    });
+</script>

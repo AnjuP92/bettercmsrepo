@@ -1,0 +1,72 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+<link href="/file/bcms-installation/Content/Styles/css/bootstrap.css" rel="stylesheet" />
+
+<link href="/file/bcms-installation/Content/Styles/cssStyles.css" rel="stylesheet" />
+<style>
+    div#home_icon {
+        position: absolute;
+        display:block;
+        top: 10%;
+        left: 3.5%;
+    }
+    #home_icon a {
+        font-family:OpenSans-Regular;
+        font-size:12px;
+    }
+
+    #home_icon i {
+        padding-right:6px;
+        font-size:14px;
+    }
+
+    #home_icon a, #home_icon i {
+        
+       
+        color:#11b3fe;
+        cursor:pointer;
+        text-transform:uppercase;
+        text-decoration:none;
+    }
+    #home_icon p#page_title{
+        font-family:OpenSans-SemiBold;
+        font-size:30px;
+        color:white;
+        text-transform:uppercase;
+        padding-top:7px;
+    }
+</style>
+
+@if (Model != null && Model.Options != null)
+{
+    string bannerImgUrl = null,Title = null;
+    string guid = Guid.NewGuid().ToString();
+    string objId = "myBanner" + guid;
+
+
+    foreach (var options in Model.Options)
+    {
+        if (options.Key == "Title")
+        {
+            Title = options.Value;
+        }
+        if (options.Key == "bannerImgUrl")
+        {
+            bannerImgUrl = options.Value;
+        }
+
+
+    }
+
+    <div style="position:relative;">
+        <div id="@objId" class="main-content">
+            <img src="@bannerImgUrl"/>
+        </div>
+        <div id="home_icon">
+            <span><a href="/"><i class="fa fa-home"></i>Home</a></span>
+            <p id="page_title">@Title</p>
+        </div>
+    </div>
+
+}

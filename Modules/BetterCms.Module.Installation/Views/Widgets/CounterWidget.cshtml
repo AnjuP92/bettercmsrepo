@@ -1,0 +1,91 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+
+
+<link rel="stylesheet" href="~/content/font-awesome.min.css">
+<script src="/file/bcms-installation/scripts/waypoints.min.js"></script>
+<script src="/file/bcms-installation/scripts/jquery.counterup.min.js"></script>
+<style>
+    .countersection {
+        
+        background-size: cover;        
+        background:fixed;
+        width: 100%;
+        padding: 100px 0px;
+    }
+    .count {
+        padding: 25px 0px;
+        overflow: hidden;
+    }
+    .count i {
+            float: left;
+            color: #d14836;
+            margin: 5px 0 0 0;
+        }
+    
+    .count .count-numbers {
+        float: left;
+        overflow: hidden;
+        margin: 0 0 0 20px;
+    }
+    .count .count-numbers h2 {
+            color: #fff;
+            margin-top: 0px;
+            font-weight: 700;
+        }
+    .count .count-numbers h4 {
+            color: #898989;
+            font-weight: 700;
+        }
+
+</style>
+@if (Model != null && Model.Options != null)
+{
+    string bgimage = string.Empty;
+    string bgcolor = string.Empty;
+    foreach (var option in Model.Options)
+    {
+
+        if (@option.Key == "BackgroundImage")
+        {
+            bgimage = @option.Value;
+        }
+        else if (@option.Key == "BackgroundColor")
+        {
+            bgcolor = @option.Value;
+        }
+        else if (@option.Key == "Json")
+        {
+
+            RenderWidgetViewModel.CounterRootObject robj = null;
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.CounterRootObject>(@option.Value);
+            if (robj != null)
+            {
+                if (robj.html != null && robj.html.Count > 0)
+                {
+                    
+
+                    <div class="countersection" style="background-color:@bgcolor; background-image:url(@bgimage);">
+                        <div class="container">
+                            <div class="row">
+                                @foreach (var obj in robj.html)
+                                {
+                                    @Html.Raw(obj.text)
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+        @*<input type="hidden" value=@bgimage id="hiddenbox"/>*@
+    }
+}
+
+<script type="text/javascript">
+
+    $('.counter').counterUp();
+    
+</script>

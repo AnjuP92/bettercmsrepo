@@ -1,0 +1,210 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+
+<link rel="stylesheet" href="/file/bcms-installation/Content/Styles/SlickSlider.css">
+
+@if (Model != null && Model.Options != null)
+{
+    string guidSlickSliderStr = "";
+    RenderWidgetViewModel.SlickSliderRootObject robj = null;
+    string img = string.Empty;
+    string name = string.Empty;
+    string position = string.Empty;
+    string content = string.Empty;
+    int slidesToShowSS = 3;
+    int slidesToScrollSS = 1;
+    string sliderWidthSS = "100%";
+    foreach (var options in Model.Options)
+    {
+        if (options.Key == "jsonFile")
+        {
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.SlickSliderRootObject>(options.Value);
+        }
+        else if (options.Key == "slidesToShow")
+        {
+            <script>
+                var slidesToShow1 = '@options.Value';
+            </script>
+            slidesToShowSS = int.Parse(options.Value);
+        }
+        else if (options.Key == "slidesToScroll")
+        {
+            <script>
+                var slidesToScroll1 = '@options.Value';
+            </script>
+            slidesToScrollSS = int.Parse(options.Value);
+        }
+        else if (options.Key == "sliderWidth")
+        {
+            <script>
+                var sliderWidth = '@options.Value';
+            </script>
+            sliderWidthSS = options.Value + "px";
+        }
+
+        if (slidesToScrollSS > slidesToShowSS)
+        {
+            slidesToScrollSS = slidesToShowSS;
+        }
+    }
+
+    if (robj != null)
+    {
+        if (robj.Details != null && robj.Details.Count > 0)
+        {
+            guidSlickSliderStr = Guid.NewGuid().ToString();
+            @*<script>
+                var guidSlickSlider = @guidSlickSliderStr;
+            </script>*@
+            <section id="features" class="blue" style="margin-top:10px;">
+                <div class="content">
+                    <div class="slider responsive @guidSlickSliderStr" style="width:@sliderWidthSS; margin:auto;">
+                        @foreach (var opt in robj.Details)
+                        {
+                            img = opt.Image;
+                            name = opt.Name;
+                            position = opt.Position;
+                            content = opt.Content;
+                            <div style="margin-left:10px;">
+                                <img src="@img" style="width:50% !important" />
+                                <div class="our-team-content-box">
+                                    <h5 class="bold">@name</h5>
+                                    <span class="position">@position</span>
+                                    <hr class="divider-color" />
+                                    <p class="para">
+                                        @content
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+            </section>
+        }
+    }
+    <style>
+        img {
+            width: 50%;
+        }
+
+        .bold {
+            font-size: 1.2em;
+            color: #000000;
+        }
+
+        .position {
+            font-size: 1em;
+            color: #000000;
+        }
+
+        hr {
+            border-color: #dddddd;
+        }
+
+        .para {
+            color: black;
+        }
+
+        .blue {
+            background-color: #ffffff;
+        }
+    </style>
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+                    <script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.js"></script>
+                    <script>
+                        var slidesToShow=3;
+                        var slidesToScroll=1;
+                        $(document).ready(function () {
+                            if (typeof slidesToShow1!='undefined')
+                                slidesToShow = parseInt(slidesToShow1);
+                            if (typeof slidesToScroll1 != 'undefined')
+                                slidesToScroll = parseInt(slidesToScroll1);
+                            if (slidesToScroll > slidesToShow)
+                                slidesToScroll = slidesToShow;
+
+                            //$('.responsive').slick({
+                            //$('.' + guidSlickSlider).slick({
+                            $('.@guidSlickSliderStr').slick({
+                                // dots: true,
+                                infinite: true,
+                                speed: 300,
+                                //slidesToShow: slidesToShow,
+                                //slidesToScroll: slidesToScroll,
+                                slidesToShow: @slidesToShowSS,
+                                slidesToScroll: @slidesToScrollSS,
+                                responsive: [{
+                                    breakpoint: 1024,
+                                    settings: {
+                                        //slidesToShow: slidesToShow,
+                                        //slidesToScroll: slidesToScroll,
+                                        slidesToShow: @slidesToShowSS,
+                                        slidesToScroll: @slidesToScrollSS,
+                                        // centerMode: true,
+
+                                    }
+
+                                }, {
+                                    breakpoint: 800,
+                                    settings: {
+                                        //slidesToShow: slidesToShow,
+                                        //slidesToScroll: slidesToScroll,
+                                        slidesToShow: @slidesToShowSS,
+                                        slidesToScroll: @slidesToScrollSS,
+                                        //dots: true,
+                                        infinite: true,
+
+                                    }
+
+
+                                }, {
+                                    breakpoint: 600,
+                                    settings: {
+                                        //slidesToShow: slidesToShow,
+                                        //slidesToScroll: slidesToScroll,
+                                        slidesToShow: @slidesToShowSS,
+                                        slidesToScroll: @slidesToScrollSS,
+                                        //dots: true,
+                                        infinite: true,
+                                        autoplay: true,
+
+                                    }
+                                }, {
+                                    breakpoint: 480,
+                                    settings: {
+                                        //slidesToShow: slidesToShow,
+                                        //slidesToScroll: slidesToScroll,
+                                        slidesToShow: @slidesToShowSS,
+                                        slidesToScroll: @slidesToScrollSS,
+                                        // dots: true,
+                                        infinite: true,
+                                        autoplay: true,
+                                        autoplaySpeed: 2000,
+                                    }
+                                },
+                                 {
+                                     breakpoint: 278,
+                                     settings: {
+                                         //slidesToShow: slidesToShow,
+                                         //slidesToScroll: slidesToScroll,
+                                         slidesToShow: @slidesToShowSS,
+                                         slidesToScroll: @slidesToScrollSS,
+                                         // dots: true,
+                                         infinite: true,
+                                         autoplay: true,
+                                         autoplaySpeed: 2000,
+                                     }
+                                 }]
+                            });
+                            //if (typeof sliderWidth != 'undefined')
+                            //$('.slick-slider').css('width', parseInt(sliderWidth) + 'px');
+                            @*if (sliderWidthSS > 0)
+                                            $('.@guidSlickSliderStr').css('width', sliderWidthSS + 'px');*@
+
+                        });
+                    </script>
+}
+
+
+
+                    @*<script src="/file/bcms-installation/scripts/js/SlickSlider.js"></script>*@

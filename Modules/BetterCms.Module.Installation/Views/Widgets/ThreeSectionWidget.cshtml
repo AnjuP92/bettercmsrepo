@@ -1,0 +1,78 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+
+<link rel="stylesheet" href="/file/bcms-installation/content/styles/imagehover.min.css" />
+<link rel="stylesheet" href="/file/bcms-installation/content/styles/newstyle.css" />
+@if (Model != null)
+{
+   
+    string bgcolor = string.Empty;
+    @if (Model.Options != null)
+    {
+
+    foreach (var option in Model.Options)
+    {
+        string imageurl = string.Empty;
+        string heading = string.Empty;
+        string text = string.Empty;
+        string iconurl = string.Empty;
+         
+        if (@option.Key =="Background_color")
+        {
+            bgcolor = @option.Value;
+        }
+        if (@option.Key == "JsonFile")
+        {
+            RenderWidgetViewModel.RootObject robj = null;
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.RootObject>(@option.Value);
+            if (robj != null)
+            {
+                if (robj.data != null && robj.data.Count > 0)
+                {
+                    <div class="threesectioncontainer container">
+                        <div class="row">
+                            @foreach (var obj in robj.data)
+                            {
+                                imageurl = obj.imageurl;
+                                heading = obj.heading;
+                                text = obj.text;
+                                iconurl = obj.iconurl;
+                                if(iconurl != "")
+                                { 
+                                <div class="widgetclass col-sm-4" >
+                                    <figure class="imghvr-push-up" style="width:100%;">
+                                        <img src=@imageurl style="width:100%;">
+                                        <figcaption style="background-color:@bgcolor;">
+                                            <div class="three_section_icon">
+                                                <img src=@iconurl />
+                                            </div>
+                                            <h4>@heading</h4>
+                                            <p>@text</p>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                }
+                                else
+                                {
+                                  <div class="widgetclass col-sm-4">
+                                     <figure class="imghvr-push-up" style="width:100%;">
+                                        <img src=@imageurl style="width:100%;">
+                                        <figcaption style="background-color:@bgcolor;">
+                                            
+                                            <h4>@heading</h4>
+                                            <p id="paragraph">@text</p>
+                                        </figcaption>
+                                     </figure>
+                                   </div>
+                                }
+
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        }
+    }
+}
+}

@@ -1,0 +1,429 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/magnific-popup.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/animate.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/imagehover.min.css" rel="stylesheet" />
+
+
+
+<script src="/file/bcms-installation/Scripts/Js/isotope.min.js"></script>
+<script src="/file/bcms-installation/Scripts/Js/magnific-popup.min.js"></script>
+@*<script src="/file/bcms-installation/Scripts/Js/portfolio.js"></script>*@
+@if (Model != null && Model.Options != null)
+{
+    string myPortFolioId = "MyPortfolio";
+    string[] filter;
+    string[] filterGroup;
+    string filterGroups = string.Empty;
+    string imghvr = string.Empty;
+    string filterTextColor = string.Empty;
+    string filterTextColorOnClick = string.Empty;
+    string filterTextFontFamily = string.Empty;
+    string filterTextFontSize = string.Empty;
+    string filterTextFontWeight = string.Empty;
+    string searchSymbolColor = string.Empty;
+    //int noofportfolio = 0;
+    int noofportfolioCol = 4;
+    int portfolioNo = 0;
+    int portFolioWidth = 0;
+    RenderWidgetViewModel.PortfolioRootObject robj = null;
+    foreach (var option in Model.Options)
+    {
+        if (option.Key == "imagehover")
+        { imghvr = option.Value; }
+
+        if (option.Key == "filterTextColor")
+        { filterTextColor = option.Value; }
+
+        if (option.Key == "filterTextColorOnClick")
+        { filterTextColorOnClick = option.Value; }
+
+        if (option.Key == "filterTextFontFamily")
+        { filterTextFontFamily = option.Value; }
+
+        if (option.Key == "filterTextFontSize")
+        { filterTextFontSize = option.Value; }
+
+        if (option.Key == "filterTextFontWeight")
+        { filterTextFontWeight = option.Value; }
+
+        if (option.Key == "searchSymbolColor")
+        { searchSymbolColor = option.Value; }
+        if (option.Key == "noofportfolio")
+        {
+            if (Convert.ToInt32(option.Value) != 0)
+            {
+                <script>
+                    var noofportfolio = '@option.Value';
+                </script>
+                portfolioNo = Convert.ToInt32(option.Value);
+                //noofportfolio = 12 / Convert.ToInt32(option.Value);
+                noofportfolioCol = 12 / Convert.ToInt32(option.Value);
+            }
+        }
+        if (option.Key == "width")
+        {
+            <script>
+                var width = '@option.Value';
+            </script>
+            portFolioWidth = int.Parse(@option.Value);
+        }
+        if (option.Key == "jsonFile")
+        {
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.PortfolioRootObject>(option.Value);
+        }
+    }
+    if (robj != null)
+    {
+        string guid = Guid.NewGuid().ToString();
+        myPortFolioId = "MyPortfolio" + guid;
+        //if (noofportfolio < 1 && noofportfolio > 12)
+        //{
+        //    noofportfolio = 4;
+        //}
+        //if (noofportfolioCol < 1 && noofportfolioCol > 12)
+        if (noofportfolioCol < 1 || noofportfolioCol > 12)
+        {
+            noofportfolioCol = 4;
+        }
+        if (robj.portfolioFilters != null && robj.portfolioFilters.Count > 0)
+        {
+            foreach (var options in robj.portfolioFilters)
+            {
+                filter = options.filter.Split(',');
+                <div id="@myPortFolioId">
+                    <section class="portfolio section-padding">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="portfolioFilter text-center">
+                                        @*<a href="#" id="all-categories" data-filter="*" class="current changecolor" style="color:@filterTextColor; font-family:@filterTextFontFamily; font-size:@filterTextFontSize; font-weight:@filterTextFontWeight;" onclick="colorchange();">All Categories</a>*@
+                                        <a href="#" id="all-categories" data-filter="*" class="current changecolor" style="color:@filterTextColor; font-family:@filterTextFontFamily; font-size:@filterTextFontSize; font-weight:@filterTextFontWeight;">All Categories</a>
+
+                                        @for (int i = 0; i <= filter.Length - 1; i++)
+                                    {
+                                        @*<a href="#" data-filter=".@filter[i].ToLower()" style="color:@filterTextColor; font-family:@filterTextFontFamily; font-size:@filterTextFontSize; font-weight:@filterTextFontWeight;" class="changecolor" onclick="colorchange();">@filter[i]</a>*@
+                                        <a href="#" data-filter=".@filter[i].ToLower()" style="color:@filterTextColor; font-family:@filterTextFontFamily; font-size:@filterTextFontSize; font-weight:@filterTextFontWeight;" class="changecolor">@filter[i]</a>
+                                    }
+                                    </div>
+                                    <div class="portfolioContainer isotope" style="text-align:center">
+                                        @if (robj.Images != null & robj.Images.Count > 0)
+                                    {
+                                        foreach (var innerOpt in robj.Images)
+                                        {
+                                            filterGroup = innerOpt.group.Split(',');
+                                            for (int j = 0; j <= filterGroup.Length - 1; j++)
+                                            {
+                                                filterGroups = filterGroups + " " + filterGroup[j];
+                                            }
+                                        @*<div class="col-lg-@noofportfolio col-md-6 col-sm-12 col-xs-12 @filterGroups isotope-item">*@
+                                        <div class="col-lg-@noofportfolioCol col-md-6 col-sm-12 col-xs-12 @filterGroups isotope-item">
+                                            <figure class="@imghvr imghvr" style="position:relative;">
+                                                <img src="@innerOpt.image" style="text-align:center" />
+                                                <a class="magnific-popup anchorsearch" href="@innerOpt.image" style="color:@searchSymbolColor;">
+                                                    <i class="fa fa-search fa-3x search_icon" style="vertical-align:middle">
+                                                    </i>
+                                                </a>
+                                            </figure>
+                                        </div>
+                                            filterGroups = string.Empty;
+                                        }
+                                    }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hidtext" id="hidtext" value="@filterTextColorOnClick" />
+                        <input type="hidden" name="hidtext1" id="hidtext1" value="@filterTextColor" />
+                    </section>
+                </div>
+            }
+        }
+    }
+    <script>
+        
+        @*function setSize()
+        {
+            var portfolioNo = 3;
+            //if (typeof noofportfolio != 'undefined') {
+            if (@portfolioNo != 0) {
+                //portfolioNo = noofportfolio;
+                portfolioNo = @portfolioNo;
+                if (noofportfolio < 1 || noofportfolio > 12)
+                    portfolioNo = 3;
+            }
+            var totalwidth = parseInt($('.container').width());
+            //if (typeof width != 'undefined') {
+            if (@portFolioWidth != 0) {
+                //totalwidth = parseInt(width);
+                totalwidth = parseInt(@portFolioWidth);
+            }
+            var itemwidth = Math.ceil((totalwidth - 30) / parseInt(portfolioNo));
+            portfoliowidth = itemwidth;
+            var percent = Math.ceil((totalwidth) * 100 / parseInt(totalwidth));
+            //$('#@myPortFolioId .portfolio .row:first').css({ 'width': percent + '%', 'margin': 'auto' });
+            $('#@myPortFolioId .portfolio .row:first').css({ 'width': totalwidth + 'px', 'margin': 'auto' });
+            $('#@myPortFolioId .portfolioContainer .isotope-item').each(function () {
+                $(this).css('width', itemwidth + 'px');
+            });
+
+            $('#@myPortFolioId .portfolioFilter').css({ 'width': totalwidth + 'px', 'margin': 'auto' });
+            $('#@myPortFolioId .portfolioContainer').css({ 'width': totalwidth + 'px', 'margin': 'auto' });
+        }*@
+        
+
+        (function ($) {
+            "use strict";
+
+            jQuery(document).ready(function ($) {
+
+                //Portfolio Popup
+                $('#@myPortFolioId  .magnific-popup').magnificPopup({ type: 'image' });
+            });
+
+
+            jQuery(window).load(function () {
+
+                //Portfolio container
+                var $container = $('#@myPortFolioId  .portfolioContainer');
+                $container.isotope({
+                    filter: '*',
+                    animationOptions: {
+                        duration: 750,
+                        easing: 'linear',
+                        queue: false
+                    }
+                });
+
+                $('#@myPortFolioId  .portfolioFilter a').on('click', function () {
+                    $('#@myPortFolioId  .portfolioFilter a').removeClass('current');
+                    $(this).addClass('current');
+                    var textcolor = document.getElementById('hidtext1').value;
+                    var textcoloronclick = document.getElementById('hidtext').value;
+                    $('#@myPortFolioId .portfolioFilter a').css({ 'color': textcolor });
+                    $(this).css({ 'color': textcoloronclick });
+
+                    var selector = $(this).attr('data-filter');
+                    $container.isotope({
+                        filter: selector,
+                        animationOptions: {
+                            duration: 750,
+                            easing: 'linear',
+                            queue: false
+                        }
+                    });
+                    return false;
+                });
+            });
+
+        }(jQuery));
+    </script>
+    <script>
+        var portfoliowidth = 0;
+        $(document).ready(function () {
+            var textcolor = document.getElementById('hidtext1').value;
+            var textcoloronclick = document.getElementById('hidtext').value;
+            $('#@myPortFolioId .portfolioFilter a').css({ 'color': textcolor });
+            $('#@myPortFolioId .portfolioFilter a#all-categories').css({ 'color': textcoloronclick });
+
+            //if (typeof noofportfolio != 'undefined') {
+            //    var totalwidth = parseInt($('.page-block').width());
+            //    if (typeof width != 'undefined') {
+            //        totalwidth = parseInt(width);
+            //    }
+            //    var itemwidth = Math.ceil((totalwidth - 30) / parseInt(noofportfolio));
+            //    portfoliowidth = itemwidth;
+            //    var viewportwidth = $('.page-block').width();
+            //    if (viewportwidth < totalwidth)
+            //        totalwidth = parseInt(viewportwidth);
+            //    var percent = Math.ceil((totalwidth) * 100 / parseInt(viewportwidth));
+            //    $('.portfolio .row:first').css({ 'width': percent + '%', 'margin': 'auto' });
+            //    $('.portfolioContainer .isotope-item').each(function () {
+            //        $(this).css('width', itemwidth + 'px');
+            //    });
+            //}
+
+            //setSize();
+            var portfolioNo = 3;
+            //if (typeof noofportfolio != 'undefined') {
+            if (@portfolioNo != 0) {
+                //portfolioNo = noofportfolio;
+                portfolioNo = @portfolioNo;
+                if (noofportfolio < 1 || noofportfolio > 12)
+                    portfolioNo = 3;
+            }
+            var totalwidth = parseInt($('.container').width());
+            //if (typeof width != 'undefined') {
+            if (@portFolioWidth != 0) {
+                //totalwidth = parseInt(width);
+                totalwidth = parseInt(@portFolioWidth);
+            }
+            var itemwidth = Math.ceil((totalwidth - 30) / parseInt(portfolioNo));
+            portfoliowidth = itemwidth;
+            var percent = Math.ceil((totalwidth) * 100 / parseInt(totalwidth));
+            //$('#@myPortFolioId .portfolio .row:first').css({ 'width': percent + '%', 'margin': 'auto' });
+            $('#@myPortFolioId .portfolio .row:first').css({ 'width': totalwidth + 'px', 'margin': 'auto' });
+            $('#@myPortFolioId .portfolioContainer .isotope-item').each(function () {
+                $(this).css('width', itemwidth + 'px');
+            });
+
+            $('#@myPortFolioId .portfolioFilter').css({ 'width': totalwidth + 'px', 'margin': 'auto' });
+            $('#@myPortFolioId .portfolioContainer').css({ 'width': totalwidth + 'px', 'margin': 'auto' });
+
+        });
+
+        $(window).resize(function () {
+            var fullwidth = parseInt($('#@myPortFolioId .portfolio .row').eq(0).width());
+            var itemwidth = parseInt($('#@myPortFolioId .portfolioContainer .isotope-item:first').width());
+            //console.log('full width: ' + parseInt($('.portfolio .row').eq(0).width()));
+            //console.log('item width: ' + parseInt($('.portfolioContainer .isotope-item:first').width()));
+            //if (parseInt($('.portfolio .row:first').width()) < parseInt(portfoliowidth) * 2) {
+            if (parseInt($('#@myPortFolioId .portfolio .row:first').width()) < parseInt(itemwidth) * 2) {
+                $('#@myPortFolioId .portfolioContainer .isotope-item').css('width', '100%');
+            }
+            else {
+                //$('.portfolioContainer .isotope-item').css('width', portfoliowidth + 'px');
+                $('#@myPortFolioId .portfolioContainer .isotope-item').css('width', itemwidth + 'px');
+            }
+
+            //setSize();
+            var portfolioNo = 3;
+            //if (typeof noofportfolio != 'undefined') {
+            if (@portfolioNo != 0) {
+                //portfolioNo = noofportfolio;
+                portfolioNo = @portfolioNo;
+                if (noofportfolio < 1 || noofportfolio > 12)
+                    portfolioNo = 3;
+            }
+            var totalwidth = parseInt($('.container').width());
+            //if (typeof width != 'undefined') {
+            if (@portFolioWidth != 0) {
+                //totalwidth = parseInt(width);
+                totalwidth = parseInt(@portFolioWidth);
+            }
+            var itemwidth = Math.ceil((totalwidth - 30) / parseInt(portfolioNo));
+            portfoliowidth = itemwidth;
+            var percent = Math.ceil((totalwidth) * 100 / parseInt(totalwidth));
+            //$('#@myPortFolioId .portfolio .row:first').css({ 'width': percent + '%', 'margin': 'auto' });
+            $('#@myPortFolioId .portfolio .row:first').css({ 'width': totalwidth + 'px', 'margin': 'auto' });
+            $('#@myPortFolioId .portfolioContainer .isotope-item').each(function () {
+                $(this).css('width', itemwidth + 'px');
+            });
+
+            $('#@myPortFolioId .portfolioFilter').css({ 'width': totalwidth + 'px', 'margin': 'auto' });
+            $('#@myPortFolioId .portfolioContainer').css({ 'width': totalwidth + 'px', 'margin': 'auto' });
+        });
+        //function colorchange() {
+        //    $('.portfolioFilter  a').click(function () {
+        //        var textcolor = document.getElementById('hidtext1').value;
+        //        var textcoloronclick = document.getElementById('hidtext').value;
+        //        $('.portfolioFilter a').css({ 'color': textcolor });
+        //        $(this).css({ 'color': textcoloronclick });
+        //    });
+        //}
+
+    </script>
+}
+
+<style type="text/css">
+    .portfolioFilter {
+        margin: 0px 0px 10px 0px;
+        overflow: hidden;
+        padding: 15px 10px;
+    }
+
+        .portfolioFilter a {
+            text-decoration: none;
+            /*margin: 15px 5px 15px 5px;*/
+            padding: 10px 15px;
+            display: inline-block;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #363636;
+            font-family: sans-serif;
+            font-size: 20px;
+        }
+
+    /*.portfolioFilter a.current {
+                color: #4532BF;
+                font-weight: 700;
+            }*/
+
+
+
+    .portfolioContainer a img {
+        margin: 15px auto;
+        width: 100%;
+        height: 100%;
+    }
+
+    .portfolioContainer1 a img {
+        /*margin:15px auto;*/
+        margin: 0px auto;
+        width: 100%;
+        height: 100%;
+    }
+
+    .isotope-item {
+        z-index: 2;
+    }
+
+    .isotope-item {
+        text-align: center;
+    }
+
+
+
+    .isotope-hidden.isotope-item {
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .isotope, .isotope .isotope-item {
+        /* change duration value to whatever you like */
+        -webkit-transition-duration: 0.8s;
+        -moz-transition-duration: 0.8s;
+        transition-duration: 0.8s;
+    }
+
+    .isotope {
+        -webkit-transition-property: height, width;
+        -moz-transition-property: height, width;
+        transition-property: height, width;
+    }
+
+        .isotope .isotope-item {
+            -webkit-transition-property: -webkit-transform, opacity;
+            -moz-transition-property: -moz-transform, opacity;
+            transition-property: transform, opacity;
+        }
+
+    .portfolioContainer .imghvr {
+        margin-bottom: 30px;
+        background-color: #4532BF;
+    }
+
+
+
+    .isotope-item a {
+        /*position: absolute;*/
+        text-align: center;
+        /*padding: 29%;*/
+        visibility: hidden;
+        color: #fff;
+    }
+
+    .isotope-item:hover a {
+        visibility: visible;
+        text-decoration: none;
+    }
+
+    .isotope-item i {
+        position: relative;
+        top: calc(50% - 20px);
+    }
+</style>

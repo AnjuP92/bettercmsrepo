@@ -1,0 +1,185 @@
+﻿
+@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+<link href="/file/bcms-installation/Content/Styles/css/bootstrap.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/colors.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/style.css" rel="stylesheet" />
+
+<style>
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
+.col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, 
+.col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, 
+.col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, 
+.col-lg-12 {
+  padding-right: 0px!important;
+  padding-left: 0px!important;
+}
+
+</style>
+
+
+@if (Model != null && Model.Options != null)
+{
+    string guid = Guid.NewGuid().ToString();
+    string objId = "myths-accordion" + guid;
+    string leftImageUrl = null;
+    string bgSize = null, leftContent = null, optionalRightContent = null, titleText=null;
+    RenderWidgetViewModel.AccordionRootObject robj = null;
+    string paddingBottom = null, buttonMargin = null, fontcolor = null, buttonCaption = null;
+    foreach (var options in Model.Options)
+    {
+        if (options.Key == "leftImageUrl")
+        {
+            leftImageUrl = options.Value;
+        }
+        else if (options.Key == "bgSize")
+        {
+            bgSize = options.Value;
+        }
+        else if (options.Key == "paddingBottom")
+        {
+            paddingBottom = options.Value;
+        }
+        else if (options.Key == "fontcolor")
+        {
+            fontcolor = options.Value;
+        }
+        else if (options.Key == "buttonMargin")
+        {
+            buttonMargin = @options.Value;
+        }
+        else if (options.Key == "buttonCaption")
+        {
+            buttonCaption = @options.Value;
+        }
+        else if (options.Key == "leftContent")
+        {
+            leftContent = @options.Value;
+        }
+        else if (options.Key == "optionalRightContent")
+        {
+            optionalRightContent = @options.Value;
+        }
+        else if (options.Key == "titleText")
+        {
+            titleText = @options.Value;
+        }
+        else if (options.Key == "json")
+        {
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.AccordionRootObject>(options.Value);
+        }
+    }
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <section class="section-whitenopadding">
+            <div class="clearfix">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div data-effect="slide-right"><img alt="Web Design Service" src="@leftImageUrl"></div>
+
+
+                </div><!-- end col-lg-6 -->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="about_widget" data-effect="slide-left">
+                    @Html.Raw(@titleText)
+                        @*<div style="border-left:2px solid black;">
+                            <div style="padding-left:10px;">
+                                <span style="color:#2b2b2b;font-size:12px;">Tips for happy and healthy life</span>
+                                <h2 style="color:#11b3fe;">MYTHS &amp; FACTS</h2>
+                            </div>
+                        </div>*@
+                        <div class="panel-group" id="@objId" style="width:85%;">
+
+                            @*<button class="accordion active">Myth:  Rheumatoid arthritis is an incurable disease!</button>
+                            <div class="panel" style="display:block;">
+                                <p><span class="bblue">Fact:</span>  In the last 10 years the options to treat rheumatoid arthritis have expanded tremendously. With early diagnosis and systematic approach to treatment rheumatoid arthritis can be very effectively treated. In every stage of the disease use treatment can relieve pain and stiffness.</p>
+                            </div>
+
+                            <button class="accordion">Myth: Medicines used in the treatment of Rheumatoid arthritis are harmful!</button>
+                            <div class="panel">
+                                <p><span class="bblue">Fact:</span> Treatment of rheumatoid arthritis is complex and should always be supervised by a qualified rheumatologist. Used judiciously medicines will give desired benefit in rheumatoid arthritis and side effects can be minimal.</p>
+                            </div>
+
+                            <button class="accordion">Myth: Joints deformities cannot be prevented!</button>
+                            <div class="panel">
+                                <p><span class="bblue">Fact:</span> The joint deformities can be prevented if the treatment is optimised by the best use of medicines. This requires a lot of skill and experience which a qualified rheumatologist can provide.</p>
+                            </div>
+                            <button class="accordion">Myth: Because treatments for rheumatoid arthritis are complex, it's best to wait until the disease progresses before beginning treatment!</button>
+                            <div class="panel">
+                                <p><span class="bblue">Fact:</span> There is now abundant proof that treating rheumatoid arthritis early prevents joint damage and disability. Ideally, treatment should start as soon as possible after diagnosis. Delaying treatment can mean worse outcomes down the road.</p>
+                            </div>
+                            <button class="accordion">Myth: Painful, stiff joints from rheumatoid arthritis need to rest most of the day!</button>
+                            <div class="panel">
+                                <p><span class="bblue">Fact:</span> With appropriate treatment patients can remain people mobile and could take up exercise and physical activity and retain their jobs.</p>
+                            </div>*@
+@if (robj != null)
+{
+    if (robj.accordiondata != null && robj.accordiondata.Count > 0)
+    {
+                            var i = 0;
+                            @foreach (var opt in robj.accordiondata)
+                            {
+                                if (i == 0)
+                                {
+                                    <button class="accordion active">@opt.heading</button>
+                                    <div class="panel" style="display:block;">
+                                        <p><span class="bblue">Fact:</span>  @opt.content</p>
+                                    </div>
+
+                                    i++;
+                                }
+                                else
+                                {
+                                    <button class="accordion">@opt.heading</button>
+                                    <div class="panel" style="display:none;">
+                                        <p><span class="bblue">Fact:</span>  @opt.content</p>
+                                    </div>
+                                }
+                            }
+    }
+}
+                            <!-- end panel -->
+                        </div><!-- panel-group -->
+                        @Html.Raw(@optionalRightContent)
+                    </div><!-- end about widget -->
+                </div><!-- end col-lg-6 -->
+
+            </div><!-- general -->
+        </section><!-- end section-whitebg -->
+    </div>
+    <script>
+        var acc = document.getElementById("@objId").getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+
+            acc[i].onclick = function () {                
+                $('#@objId .accordion.active').not(this).removeClass('active').next().css('display', 'none');
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+
+                
+               
+            }
+            
+        }
+    </script>
+</body>
+</html>
+
+}

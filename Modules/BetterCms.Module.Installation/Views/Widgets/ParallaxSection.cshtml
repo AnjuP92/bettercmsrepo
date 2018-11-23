@@ -1,0 +1,72 @@
+﻿
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+@{
+    ViewBag.Title = "ResponsiveSlider";
+}
+
+<style>
+    .parallax {
+        min-height: 1000px;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding-top:15%!important;
+    }
+    .parallax-container {
+        padding-top:0%!important;
+    }
+    .parallax-row {
+         text-align:center!important;
+     }
+     .p-img {
+        max-height:300px!important;
+        overflow:hidden;
+    }
+</style>
+
+@if (Model != null && Model.Options != null)
+{
+    foreach (var option in Model.Options)
+    {
+        string parallaximage = string.Empty;
+        string parallaxheading = string.Empty;
+        string parallaxdiv = string.Empty;
+
+        if (@option.Key == "json")
+        {
+            RenderWidgetViewModel.SliderRootObject robj = null;
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.SliderRootObject>(@option.Value);
+
+            if (robj != null)
+            {
+
+                if (robj.parallaximage != null && robj.parallaxdiv != null && robj.parallaxdiv.Count > 0)
+                {
+
+                    parallaximage = robj.parallaximage;
+                    parallaxheading = robj.parallaxheading;
+                    <div class="parallax" style="background-image:url(@parallaximage)!important;">
+
+                        @Html.Raw(@parallaxheading)
+                        <div class="parallax-container container">
+                            <div class="parallax-row row">
+                                @foreach (var obj2 in robj.parallaxdiv)
+                                {
+
+
+                                    @Html.Raw(obj2.parallaxtext)
+                                }
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,40 @@
+﻿ul.social {
+	position: relative;
+	float:right;
+	top:-5px;
+	
+}
+
+ul.social li a{
+	background-color:transparent;
+	background-image:url('../images/SocialIconSprite.png');
+	background-repeat:no-repeat;
+	background-size:auto 96px;
+	border:0 none;
+	color:white;
+	direction:ltr;display:block; 
+	height:32px;
+	overflow:hidden;
+	text-align:left;
+	text-decoration:none;
+	text-indent:-999em;
+	transition:all 0.2s ease 0s;
+	width:32px;
+}
+
+.ie7 ul.social li a, .ie8 ul.social li a {
+	background-image:url('../images/SocialIconSprite.png');
+}
+ul.social li.facebook a { background-position:0 0; }
+ul.social li.twitter a{ background-position:-256px 0; }
+ul.social li.linkedin a{ background-position:-128px 0; }
+ul.social li.facebook a:hover, #sidebar ul.social li.facebook a:hover { background-position:0 -32px; }
+ul.social li.twitter a:hover, #sidebar ul.social li.twitter a:hover{ background-position:-256px -32px; }
+ul.social li.linkedin a:hover, #sidebar ul.social li.linkedin a:hover{ background-position:-128px -32px; }
+
+ul.social li {
+
+	list-style: none outside none;
+	border:none;
+	float:left;
+}

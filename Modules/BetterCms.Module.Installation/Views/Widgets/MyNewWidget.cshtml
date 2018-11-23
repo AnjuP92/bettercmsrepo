@@ -1,0 +1,37 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+
+@if (Model != null)
+{
+
+    <h2>@Model.Widget.Name</h2>
+    var divcount = "";
+    var text = "";
+   
+    @if (Model != null && Model.Options != null)
+    {
+
+        divcount = Model.Options[0].Value;
+        text = Model.Options[1].Value;
+        
+        <div class="container">
+            <div class="row">
+                @for (var count = 0; count < Convert.ToInt32(divcount); count++)
+                {
+
+                    <div class="col-sm-4" style="background-color:lavender;margin:20px;">
+                        <img src="/file/bcms-installation/content/styles/images/banner_img.jpg" style="height:200px;" />
+                        <h3>@text</h3>
+
+                    </div>
+
+                }
+            </div>
+        </div>
+
+
+
+
+       
+      }
+}

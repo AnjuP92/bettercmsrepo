@@ -1,0 +1,116 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+<link href="/file/bcms-installation/Content/Styles/css/bootstrap.css" rel="stylesheet" />
+
+<link href="/file/bcms-installation/Content/Styles/cssStyles.css" rel="stylesheet" />
+
+
+@if (Model != null && Model.Options != null)
+{
+    int count = 0;
+    string guid = Guid.NewGuid().ToString();
+    string objId = "myCarousel" + guid;
+    string imgUrlLeftArrow = null, imgUrlRightArrow = null;
+    
+    foreach (var options in Model.Options)
+    {
+        if (options.Key.Contains("sliderimgurl"))
+        {
+            count++;
+        }
+        if (options.Key == "imgUrlLeftArrow")
+        {
+            imgUrlLeftArrow = options.Value;
+        }
+        else if (options.Key == "imgUrlRightArrow")
+        {
+            imgUrlRightArrow = options.Value;
+        }
+
+    }
+
+    string[] sliderdataimg = new string[count+1];
+    string[] sliderdatacaption = new string[count+1];
+    string[] sliderdatatext = new string[count+1];
+    
+    for (int i = 1; i <= count; i++)
+    {
+        foreach (var options in Model.Options)
+        {
+            if (options.Key == ("sliderimgurl" + i))
+            {
+                sliderdataimg[i] = options.Value;
+            }
+            else if (options.Key == ("slidercaption" + i))
+            {
+                sliderdatacaption[i] = options.Value;
+            }
+            else if (options.Key == ("slidersmalltext" + i))
+            {
+                sliderdatatext[i] = options.Value;
+            }
+        }
+    }
+
+    <div>
+        <div class="main-content sliders">
+
+            <div id="@objId" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                       
+                            @{
+                                for(int j=0;j<count;j++)
+                                {
+                                    if (j == 0)
+                                    {
+                                        <li data-target="#@objId" data-slide-to="0" class="active"></li>
+                                    }
+                                    else
+                                    {
+                                        <li data-target="#@objId" data-slide-to="@j"></li>
+                                    }
+                                }
+                            }
+                        
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    
+                    @{
+                        for(int k=1;k<=count;k++)
+                        {
+                                <div class="item @((k==1)?"active":"")">
+                                    <img src="@sliderdataimg[k]" alt="" style="width:100%;">
+                                    <div class="sliders-overlay-msg">
+                                        <div class="sliders-overlay-msg-besthospital slider-caption">
+                                            <span>@sliderdatacaption[k]</span>
+                                        </div>
+                                        <div class="sliders-overlay-msg-extrappl slider-caption">
+                                            <span>@sliderdatatext[k]</span>
+                                        </div>
+                                    </div>
+                                 </div>
+                                
+                            }
+                        
+                    }
+
+                                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" style="background-image:url('@imgUrlLeftArrow')!important;" href="#@objId" data-slide="prev">
+                    <span class=""></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" style="background-image:url('@imgUrlRightArrow')!important;" href="#@objId" data-slide="next">
+                    <span class=""></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+}

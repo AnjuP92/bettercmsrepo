@@ -1,0 +1,84 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+@using BetterCms.Module.Root.ViewModels.Cms
+@{
+    ViewBag.Title = "Slider";
+}
+
+<script>
+    $(document).ready(function () {
+        $('#accordion div.panel div.panel-collapse:first').addClass('in', changeicon());
+
+
+        $('#accordion div.panel div.collapse').parent().find('div.panel-heading span.btn').html('<span class="glyphicon glyphicon-collapse-down"></span>');
+        $('#accordion div.panel div.collapse.in ').parent().find('div.panel-heading span.btn').html('<span class="glyphicon glyphicon-collapse-up"></span>');
+        $('#accordion2 div.panel div.collapse').parent().find('div.panel-heading span.subbtn').html('<span class="glyphicon glyphicon-collapse-down"></span>');
+
+
+      function  changeicon () {
+            $('#accordion div.panel div.panel-collapse:first').parent().find('div.panel-heading span.btn').html('<span class="glyphicon glyphicon-collapse-up"></span>');
+        };
+
+        $("#accordion div.panel div.collapse").on("hide.bs.collapse", function () {
+             $(this).parent().find('div.panel-heading span.btn').html('<span class="glyphicon glyphicon-collapse-down"></span>');
+        });
+        $("#accordion div.panel div.collapse").on("show.bs.collapse", function () {       
+            $(this).parent().find('div.panel-heading span.btn').html('<span class="glyphicon glyphicon-collapse-up"></span>');
+         });
+        $("#accordion2 div.panel div.collapse").on("hide.bs.collapse", function () {
+            $(this).parent().find('div.panel-heading span.subbtn').html('<span class="glyphicon glyphicon-collapse-down"></span>');
+        });
+        $("#accordion2 div.panel div.collapse").on("show.bs.collapse", function () {          
+            $(this).parent().find('div.panel-heading span.subbtn').html('<span class="glyphicon glyphicon-collapse-up"></span>');
+         });
+    });
+
+</script>
+<style>
+    a, a:hover, a:focus {
+        text-decoration: none !important;
+        color: black;
+    }
+
+    a {
+        text-decoration: none !important;
+        color: black;
+    }
+</style>
+
+@if (Model != null && Model.Options != null)
+{
+    foreach (var option in Model.Options)
+    {
+        
+        string accordiontitle = string.Empty;
+        string accordiontext = string.Empty;
+
+        if (@option.Key == "json")
+        {
+            RenderWidgetViewModel.SliderRootObject robj = null;
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.SliderRootObject>(@option.Value);
+            if (robj != null)
+            {
+                if (robj.accordion != null && robj.accordion.Count > 0)
+                {
+                    <div class="panel-group" id="accordion">
+                        @foreach (var obj in robj.accordion)
+                        {
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="background-color:@robj.acordionbackground!important;text-align:center;">
+                                    <h4 class="panel-title">
+                                        @Html.Raw(obj.accordiontitle)                                       
+                                    </h4>
+                                </div>                                
+                                @Html.Raw(obj.accordiontext)
+                            </div>
+                        }
+                    </div>
+                }
+            }
+        }
+    }
+}

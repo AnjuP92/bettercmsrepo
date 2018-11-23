@@ -1,0 +1,151 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+
+    <link rel="stylesheet" href="/file/bcms-installation/Content/Styles/ShuffleStyle.css">
+    <link rel="stylesheet" href="/file/bcms-installation/Content/Styles/ShuffleStyle1.css">
+    
+    <script src="/file/bcms-installation/scripts/js/Shufflejs.js"></script>
+    <script src="/file/bcms-installation/scripts/js/Shufflejs1.js"></script>
+    
+
+<section id="demo">
+    <div class="container filter">
+        <div class="row">
+            <div class="col-9@sm">
+                <p class="filter_label">Filter :</p>
+                <div class="filter-options btn-group">
+                    <button class="btn btn--warning" data-group="wallpaper">Wallpapers</button>
+                    <button class="btn btn--warning" data-group="graphics">Graphic Design</button>
+                    <button class="btn btn--warning" data-group="photography">Photos</button>
+                    <button class="btn btn--warning" data-group="3d">3D Renders</button>
+                </div>
+            </div>
+            <div class="container">
+                <div id="grid" class="row my-shuffle-container shuffle">
+                    <figure class="col-3@xs col-4@sm col-3@md picture-item shuffle-item shuffle-item--visible" data-groups="[&quot;photography&quot;]"
+                            data-title="Baseball">
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">                                    
+                                    <img src="~/Content/Styles/images/banner_img.jpg" />
+                                    <img src="~/Content/Styles/images/banner_img.jpg" class="picture-item__blur" />
+                                </div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay shuffle-item shuffle-item--visible" data-groups="[&quot;wallpaper&quot;,&quot;3d&quot;]" data-title="Tennis" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>                        
+                        </div>
+                    </figure>
+                    <figure class="col-3@xs col-4@sm col-3@md picture-item shuffle-item shuffle-item--visible" data-groups="[&quot;wallpaper&quot;,&quot;3d&quot;]" data-title="iMac" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>                           
+                        </div>
+                    </figure>
+                    <figure class="col-6@xs col-4@sm col-3@md picture-item picture-item--h2 shuffle-item shuffle-item--visible" data-groups="[&quot;graphics&quot;]" data-title="Master Chief" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="col-3@xs col-4@sm col-3@md picture-item shuffle-item shuffle-item--visible" data-groups="[&quot;wallpaper&quot;,&quot;3d&quot;]" data-title="Eightfold" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>
+                       </div>
+                    </figure>
+                    <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay shuffle-item shuffle-item--visible" data-groups="[&quot;photography&quot;]" data-title="Pumpkin" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>                           
+                        </div>
+                    </figure>
+                    <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--h2 shuffle-item shuffle-item--visible" data-groups="[&quot;wallpaper&quot;,&quot;3d&quot;]" data-title="Vestride" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>                           
+                        </div>
+                    </figure>
+                    <figure class="col-6@xs col-4@sm col-3@md picture-item picture-item--h2 shuffle-item shuffle-item--visible" data-groups="[&quot;graphics&quot;]" data-title="Newegg" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>                            
+                        </div>
+                    </figure>
+                    <figure class="col-3@xs col-4@sm col-3@md picture-item shuffle-item shuffle-item--visible" data-groups="[&quot;wallpaper&quot;]"  data-title="Arc" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>                            
+                        </div>
+                    </figure>
+                    <figure class="col-3@xs col-4@sm col-3@md picture-item shuffle-item shuffle-item--visible" data-groups="[&quot;photography&quot;]" data-title="Ground" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>                           
+                        </div>
+                    </figure>
+                    <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay shuffle-item shuffle-item--visible" data-groups="[&quot;wallpaper&quot;]"  data-title="Grass" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>                           
+                        </div>
+                    </figure>
+                    <figure class="col-3@xs col-4@sm col-3@md picture-item shuffle-item shuffle-item--visible" data-groups="[&quot;wallpaper&quot;,&quot;3d&quot;]" data-date-created="2013-05-19" data-title="Vestride" >
+                        <div class="picture-item__inner">
+                            <div class="aspect aspect--16x9">
+                                <div class="aspect__inner">
+                                    <img src="~/Content/Styles/images/banner_img.jpg">
+                                    <img class="picture-item__blur" src="~/Content/Styles/images/banner_img.jpg">
+                                </div>
+                            </div>                            
+                        </div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

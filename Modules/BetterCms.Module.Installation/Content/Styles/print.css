@@ -1,0 +1,4 @@
+﻿@media print {
+    #nav, #Footer { display: none !important; }
+	
+}

@@ -1,0 +1,209 @@
+﻿.threesectioncontainer{
+    padding:30px;
+}
+
+.three_section_icon{
+    display:inline-block;
+    margin-top:10px;
+    float:left;
+    margin-right:15px;
+}
+
+
+[class^='imghvr-'] h4,
+[class*=' imghvr-'] h4{
+    font-size:22px;
+    display:inline-block;
+    margin-top:10px;
+}
+[class^='imghvr-'] p,
+[class*=' imghvr-'] p{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 30px;
+    margin-bottom:20px;
+    margin-top: 0px;
+    margin-left:50px;
+}
+[class^='imghvr-'] #paragraph,
+[class*=' imghvr-'] #paragraph {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 30px;
+  
+    margin-top: 0px;
+    margin-left:0px;
+}
+.footer{    
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+    padding-top:50px;
+    padding-bottom:53px;
+}
+.footer_logo{
+    padding-left: 32px;
+    padding-bottom: 10px;
+}
+.footer_top {
+    padding-bottom: 15px;
+    padding-top: 50px;
+}
+.footer_bottom{
+    padding-bottom: 15px;
+    padding-top: 70px;
+}
+.footersection{
+        margin-top:20px;
+    }
+.footersection a:hover{
+        text-decoration:none;        
+    }
+
+.footer_linktext{
+    padding-left:20px;
+    text-align:left;
+}
+.footer_linktext p{
+    font-weight: 600; 
+    font-style: normal;
+    font-family: 'Open Sans', sans-serif;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.8;
+    letter-spacing: 0px;
+}
+.footer_linktext a{
+    color: #ffffff;
+}
+.footer_contactdetails p{
+    padding-bottom:15px;
+    color: #ced2d5;
+    font-weight: 600;
+    font-style: normal;
+    padding-left:0px;
+    text-align:left;
+}
+.footer_first-section{
+    padding-left:20px;
+    text-align:left;
+}
+.footer_linktext a:hover{
+    color:red!important;
+}
+
+.footer_emailtextbox{
+    border-top-width: initial;
+    border-right-width: initial;
+    border-left-width: initial;
+    height: 55px;
+    font-size: 14px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    background-color: transparent;
+    color: rgb(191, 197, 200);
+    width: 100%;
+    display: block;
+    border-style: none none solid;
+    border-image: initial;
+    border-bottom: 1px solid rgb(208, 40, 73);
+    padding: 12px 30px;
+    border-color: rgb(208, 40, 73);
+}
+.footer_emailtextbox:focus{
+    border-style: none none solid;
+}
+.footersubscribe {
+        padding: 14px 22px;
+        padding-left: 0px;
+        margin-top: 10px;
+        text-align:left;
+    }
+.footersubscribe a {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 800;
+            font-style: normal;
+            color: #000000;
+            background-color: #00e18f;
+            min-width: 178px;
+            font-size: 15px;
+            padding: 14px 22px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+@media screen and (max-width: 1200px){
+   
+     .widgetclass{
+        width:50%;
+        padding-top:15px;
+        padding-bottom:15px;               
+    }   
+
+}
+@media screen and (max-width: 991px) {
+    [class^='imghvr-'] figcaption,
+    [class*=' imghvr-'] figcaption {
+        padding-top:10px;
+        padding-left:10px;
+    }   
+    .widgetclass{
+        width:50%;
+        padding-top:15px;
+        padding-bottom:15px;
+    }
+    .footer_emailtextbox 
+    {
+        padding:5px!important;
+    }
+    .footer_maintext{
+        font-size:35px!important;
+    }
+    .footer_subtext{
+        font-size:12px;
+    }
+    .footer_first-section{
+        padding-left:0px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .widgetclass{
+        width:100%;
+        padding-top:10px;
+        padding-bottom:10px;
+    }  
+    
+    [class^='imghvr-'] figcaption,
+    [class*=' imghvr-'] figcaption {
+        padding:30px;
+        
+    }  
+    .footer{
+    padding-top:35px;
+    
+      }
+    .footer_top{
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    
+    .footer_bottom{
+        padding-bottom: 10px!important;
+        padding-top: 25px!important;
+    }
+    .footer_linktext{
+        padding-left:0px;
+    }
+    .footer_first-section{
+    padding-left:0px;
+    margin-top:0px!important;
+}
+    .footer_logo{
+        padding-left:0px;
+        width:50%;
+    }
+    .footer_contactdetails p{
+        padding-bottom:0px;
+    }
+}
+

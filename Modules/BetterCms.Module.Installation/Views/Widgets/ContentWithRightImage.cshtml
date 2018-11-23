@@ -1,0 +1,59 @@
+﻿
+@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+<link href="/file/bcms-installation/Content/Styles/css/bootstrap.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/colors.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/style.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/cssStyles.css" rel="stylesheet" />
+<!DOCTYPE html>
+@if (Model != null && Model.Options != null)
+{
+    string guid = Guid.NewGuid().ToString();
+    string objId = "contentwithRightImage" + guid;
+    string img = string.Empty;
+    string bgimg = string.Empty;
+    string leftPartTxt = string.Empty;
+    string leftTxt = string.Empty;
+    foreach (var options in Model.Options)
+    {
+        if (options.Key == "imageurl")
+        {
+            img = options.Value;
+        }
+        else if (options.Key == "backgroundimageurl")
+        {
+            bgimg = options.Value;
+        }
+        else if (options.Key == "leftparttext")
+        {
+            leftPartTxt = options.Value;
+        }
+    }
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title></title>
+    </head>
+    <body>
+        <div>
+            <section id="@objId" class="section-whitebg" style="background:url( @bgimg );">
+                <div class="container">
+                    <div class="col-lg-7 col-md-7 col-sm-12">
+                        <div class="widget clearfix">
+                            <div class="services_lists">
+                                <div id="ContentWithRightImage_LeftPart">@Html.Raw(@leftPartTxt)</div>
+                            </div><!-- services_lists -->
+                        </div><!-- end widget -->
+                    </div><!-- end col-lg-6 -->
+                    <div class="col-lg-5 col-md-5 col-sm-12">
+                        <div class="widget" data-effect="slide-left">
+                            <img style="margin-top:115px;" alt="" src="@img">
+                        </div>
+                    </div><!-- end col-lg-6 -->
+                </div><!-- end container -->
+            </section>
+        </div>
+    </body>
+</html>
+}

@@ -1,0 +1,593 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+
+
+<link rel="stylesheet" href="/file/bcms-installation/Content/Styles/animate.css">
+<link href="/file/bcms-installation/content/styles/bootstrap-dropdown-hover.min.css" rel="stylesheet" />
+
+<script src="/file/bcms-installation/scripts/js/bootstrap-dropdownhover.min.js"></script>
+
+@if (Model != null && Model.Options != null)
+{
+    foreach (var option in Model.Options)
+    {
+        string menuname = string.Empty;
+        string menulogo = string.Empty;
+        string text = string.Empty;
+        string homeimage = string.Empty;
+        string link = string.Empty;
+        string subLink = string.Empty;
+        string subText = string.Empty;
+
+        string mainbgcolor = string.Empty;
+        string menubackcolor = string.Empty;
+        string listbackcolor = string.Empty;
+        string menubackcoloronhover = string.Empty;
+
+        string bordercolor = string.Empty;
+
+        string textcolorheader = string.Empty;
+        string textcolormenu = string.Empty;
+        string textcolorsubmenu = string.Empty;
+
+        string animation = string.Empty;
+        string navbarstyle = string.Empty;
+
+        string fontfamilyheader = string.Empty;
+        string fontfamilymenu = string.Empty;
+        string fontfamilysubmenu = string.Empty;
+
+        string fontsizeheader = string.Empty;
+        string fontsizemenu = string.Empty;
+        string fontsizesubmenu = string.Empty;
+
+        string fontweightheader = string.Empty;
+        string fontweightmenu = string.Empty;
+        string fontweightsubmenu = string.Empty;
+
+        string lastdividercolor = string.Empty;
+        string maindividercolor = string.Empty;
+        string listbackcoloronhover = string.Empty;
+
+        string textcolorheaderhover = string.Empty;
+        string textcolormenuhover = string.Empty;
+        string textcolorsubmenuhover = string.Empty;
+
+        string togglebordercolor = string.Empty;
+        string togglebackcolor = string.Empty;
+        string togglebackcoloronhover = string.Empty;
+        string toggleiconcolor = string.Empty;
+
+        string navbarbrandpaddingtop = string.Empty;
+        string navbarbrandpaddingbottom = string.Empty;
+        string navbarbrandpaddingleft = string.Empty;
+        string navbarbrandpaddingright = string.Empty;
+
+        string navbarpaddingtop = string.Empty;
+        string navbarpaddingbottom = string.Empty;
+        string navbarpaddingleft = string.Empty;
+        string navbarpaddingright = string.Empty;
+
+        string dropdownpaddingtop = string.Empty;
+        string dropdownpaddingbottom = string.Empty;
+        string dropdownpaddingleft = string.Empty;
+        string dropdownpaddingright = string.Empty;
+
+        int count = 0;
+        int cnt = 1;
+        if (option.Key == "jsonFile")
+        {
+            RenderWidgetViewModel.MenuRootObject robj = null;
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.MenuRootObject>(option.Value);
+
+
+            foreach (var opt in Model.Options)
+            {
+                if (opt.Key == "menuname_or_menulogo")
+                { menuname = opt.Value; }
+
+                if (opt.Key == "mainBackgroundColor")
+                { mainbgcolor = opt.Value; }
+
+                if (opt.Key == "border-color")
+                { bordercolor = opt.Value; }
+
+                if (opt.Key == "dataAnimation")
+                { animation = opt.Value; }
+
+                if (opt.Key == "menuBackgroundColor")
+                { menubackcolor = opt.Value; }
+
+                if (opt.Key == "menubackcoloronhover")
+                { menubackcoloronhover = opt.Value; }
+
+                if (opt.Key == "listBackgroundColor")
+                { listbackcolor = opt.Value; }
+
+                if (opt.Key == "font-family-header")
+                { fontfamilyheader = opt.Value; }
+
+                if (opt.Key == "font-family-menu")
+                { fontfamilymenu = opt.Value; }
+
+                if (opt.Key == "font-family-submenu")
+                { fontfamilysubmenu = opt.Value; }
+
+                if (opt.Key == "font-size-header")
+                { fontsizeheader = opt.Value; }
+
+                if (opt.Key == "font-size-menu")
+                { fontsizemenu = opt.Value; }
+
+                if (opt.Key == "font-size-submenu")
+                { fontsizesubmenu = opt.Value; }
+
+                if (opt.Key == "font-weight-header")
+                { fontweightheader = opt.Value; }
+
+                if (opt.Key == "font-weight-menu")
+                { fontweightmenu = opt.Value; }
+
+                if (opt.Key == "font-weight-submenu")
+                { fontweightsubmenu = opt.Value; }
+
+                if (opt.Key == "textcolor-header")
+                { textcolorheader = opt.Value; }
+
+                if (opt.Key == "textcolor-menu")
+                { textcolormenu = opt.Value; }
+
+                if (opt.Key == "text-color-submenu")
+                { textcolorsubmenu = opt.Value; }
+
+                if (opt.Key == "textcolor-headerhover")
+                { textcolorheaderhover = opt.Value; }
+
+                if (opt.Key == "textcolor-menuhover")
+                { textcolormenuhover = opt.Value; }
+
+                if (opt.Key == "textcolor-submenuhover")
+                { textcolorsubmenuhover = opt.Value; }
+
+                if (opt.Key == "last-divider-color")
+                { lastdividercolor = opt.Value; }
+
+                if (opt.Key == "listbackcoloronhover")
+                { listbackcoloronhover = opt.Value; }
+
+                if (opt.Key == "toggle-border-color")
+                { togglebordercolor = opt.Value; }
+
+                if (opt.Key == "toggle-backcolor")
+                { togglebackcolor = opt.Value; }
+
+                if (opt.Key == "toggle-backcoloronhover")
+                { togglebackcoloronhover = opt.Value; }
+
+                if (opt.Key == "toggle-iconcolor")
+                { toggleiconcolor = opt.Value; }
+
+                if (opt.Key == "navbarbrand-paddingtop")
+                { navbarbrandpaddingtop = opt.Value; }
+
+                if (opt.Key == "navbarbrand-paddingbottom")
+                { navbarbrandpaddingbottom = opt.Value; }
+
+                if (opt.Key == "navbarbrand-paddingleft")
+                { navbarbrandpaddingleft = opt.Value; }
+
+                if (opt.Key == "navbarbrand-paddingright")
+                { navbarbrandpaddingright = opt.Value; }
+
+                if (opt.Key == "navbar-paddingtop")
+                { navbarpaddingtop = opt.Value; }
+
+                if (opt.Key == "navbar-paddingbottom")
+                { navbarpaddingbottom = opt.Value; }
+
+                if (opt.Key == "navbar-paddingleft")
+                { navbarpaddingleft = opt.Value; }
+
+                if (opt.Key == "navbar-paddingright")
+                { navbarpaddingright = opt.Value; }
+
+                if (opt.Key == "dropdown-paddingtop")
+                { dropdownpaddingtop = opt.Value; }
+
+                if (opt.Key == "dropdown-paddingbottom")
+                { dropdownpaddingbottom = opt.Value; }
+
+                if (opt.Key == "dropdown-paddingleft")
+                { dropdownpaddingleft = opt.Value; }
+
+                if (opt.Key == "dropdown-paddingright")
+                { dropdownpaddingright = opt.Value; }
+
+                if (opt.Key == "dividercolor")
+                { maindividercolor = opt.Value; }
+
+                if (opt.Key == "navbarstyle")
+                {
+                    navbarstyle = opt.Value;
+                    if (navbarstyle == null || navbarstyle == "")
+                    {
+                        navbarstyle = "navbar-default";
+                    }
+                    else if (navbarstyle.ToLower().Contains("static-top"))
+                    {
+                        navbarstyle = "navbar-static-top";
+                    }
+                    else if (navbarstyle.ToLower().Contains("fixed-top"))
+                    {
+                        navbarstyle = "navbar-fixed-top";
+                    }
+                    else
+                    {
+                        navbarstyle = "navbar-default";
+                    }
+                }
+            }
+            if (robj != null)
+            {
+                if (robj.menu != null && robj.menu.Count > 0 && robj.data != null && robj.data.Count > 0)
+                {
+                    foreach (var options in robj.menu)
+                    {
+                        menuname = options.menuname_or_menulogo;
+                        //menulogo = options.menuLogo;
+                        if (menuname.StartsWith("http"))
+                        {
+                            menulogo = menuname;
+                            menuname = string.Empty;
+                        }
+                        <nav class="navbar navbar-default @navbarstyle" style="background-color:@mainbgcolor; padding-top:@navbarpaddingtop; padding-bottom:@navbarpaddingbottom; padding-left:@navbarpaddingleft; padding-right:@navbarpaddingright; ">
+                            <div class="container">
+                                <div class="navbar-header" style="font-family: @fontfamilyheader;  font-weight:@fontweightheader;">
+                                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="border-color:@togglebordercolor;  background-color:@togglebackcolor;" onmouseover="this.style.backgroundColor='@togglebackcoloronhover';" onmouseout="this.style.backgroundColor='@togglebackcolor';">
+                                        <span class="sr-only">Toggle Navigation</span>
+                                        <span class="icon-bar" style="background-color:@toggleiconcolor;"></span>
+                                        <span class="icon-bar" style="background-color:@toggleiconcolor;"></span>
+                                        <span class="icon-bar" style="background-color:@toggleiconcolor;"></span>
+                                    </button>
+                                    <a id="imganchor" class="navbar-brand" href="#" style="color:@textcolorheader; background-image:url(@menulogo); background-repeat:no-repeat; padding:0px 10px; font-size:@fontsizeheader; padding-top:@navbarbrandpaddingtop; padding-bottom:@navbarbrandpaddingbottom; padding-left:@navbarbrandpaddingleft; padding-right:@navbarbrandpaddingright; " onmouseover="this.style.color='@textcolorheaderhover' " onmouseout="this.style.color='@textcolorheader' ">
+                                        @menuname
+                                    </a>
+
+                                </div>
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" data-hover="dropdown" data-animations="@animation">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        @foreach (var dataobj in robj.data)
+                                        {
+                                            text = dataobj.text;
+                                            link = dataobj.link;
+                                            if (text.StartsWith("http"))
+                                            {
+                                                homeimage = text;
+                                                text = string.Empty;
+                                            }
+
+                                            if (dataobj.sub != null && dataobj.sub.Count > 0)
+                                            {
+                                                <li class="dropdown" style="font-family: @fontfamilymenu;  font-size:@fontsizemenu; font-weight:@fontweightmenu; background-color:@menubackcolor;">
+                                                    @if (homeimage != "")
+                                                    {
+                                                        
+                                                        <a href="@link" class="dropdown-toggle listdrop " data-toggle="dropdown" role="button" aria-expanded="false" style="color:@textcolormenu;" onmouseover="this.style.color='@textcolormenuhover'; this.style.backgroundColor='@menubackcoloronhover' " onmouseout="this.style.color = '@textcolormenu'; this.style.backgroundColor='@menubackcolor'">
+                                                            <img src="@homeimage"/>
+                                                            <span class="caret"></span>
+                                                        </a>homeimage = string.Empty;
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <a href="@link" class="dropdown-toggle listdrop " data-toggle="dropdown" role="button" aria-expanded="false" style="color:@textcolormenu;" onmouseover="this.style.color='@textcolormenuhover'; this.style.backgroundColor='@menubackcoloronhover' " onmouseout="this.style.color = '@textcolormenu'; this.style.backgroundColor='@menubackcolor'">
+                                                            @text
+                                                            <span class="caret"></span>
+                                                        </a>
+                                                        <ul class="dropdown-menu submenu" style="background-color:@listbackcolor; " role="menu">
+                                                            @foreach (var submenu in dataobj.sub)
+                                                            {
+                                                                count = dataobj.sub.Count;
+                                                                subText = submenu.text;
+                                                                subLink = submenu.link;
+
+                                                                <li style="font-family: @fontfamilysubmenu;  font-size:@fontsizesubmenu;  ">
+                                                                    <a href="@subLink" style="color:@textcolorsubmenu; font-weight:@fontweightsubmenu; padding-top:@dropdownpaddingtop; padding-bottom:@dropdownpaddingbottom; padding-left:@dropdownpaddingleft; padding-right:@dropdownpaddingright;" onmouseover="this.style.backgroundColor='@listbackcoloronhover'; this.style.color='@textcolorsubmenuhover'; " onmouseout="this.style.backgroundColor = '@listbackcolor'; this.style.color = '@textcolorsubmenu'; ">@subText</a>
+                                                                </li>
+                                                                <li class="divider" style="color:@maindividercolor"></li>
+                                                            }
+                                                            @for (cnt = 1; cnt <= count + 1; cnt++)
+                                                            {
+                                                                if (cnt > count)
+                                                                {
+                                                                    <li class="divider-color" style="background:@lastdividercolor;"></li>
+                                                                }
+                                                            }
+                                                        </ul>
+                                                    }
+                                                </li>
+                                            }
+                                            else
+                                            {
+
+                                                <li style="font-family:@fontfamilymenu;  font-size:@fontsizemenu; font-weight:@fontweightmenu; color:@textcolormenu; background-color:@menubackcolor; ">
+                                                    @if (homeimage != "")
+                                                    {
+                                                        <a href="@link" style="color:@textcolormenu;  " onmouseover="this.style.color='@textcolormenuhover'; this.style.backgroundColor='@menubackcoloronhover' " onmouseout="this.style.color = '@textcolormenu'; this.style.backgroundColor='@menubackcolor'">
+                                                            <img src="@homeimage" />                                                          
+                                                        </a>homeimage = string.Empty;
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <a href="@link" style="color:@textcolormenu;" onmouseover="this.style.color='@textcolormenuhover'; this.style.backgroundColor='@menubackcoloronhover'" onmouseout="this.style.color = '@textcolormenu'; this.style.backgroundColor = '@menubackcolor'">@text</a>
+                                                    }
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </nav>
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+<style type="text/css">
+    .navbar-brand {
+        float: left;
+        height: 50px;
+        padding: 10px 15px;
+        line-height: 20px;
+    }
+
+    .navbar-default {
+        background: #fff;
+        border: none;
+        border-radius: 0px;
+        /*padding: 20px 10px 20px;*/
+        margin-bottom: 0px;
+        text-transform: capitalize;
+        font-size: 14px;
+    }
+
+        .navbar-default .navbar-nav > li {
+            background: #fff;
+        }
+
+    .navbar-nav > li > a {
+        line-height: 35px;
+    }
+
+    .navbar-default .navbar-nav > li > ul; {
+        background: #fff;
+    }
+
+    .navbar-header {
+        font-family: sans-serif;
+        font-size: 18px;
+        font-weight: 100;
+    }
+
+    navbar-default .navbar-header .navbar-brand {
+        color: #363636;
+    }
+
+
+    .navbar-nav > li {
+        font-family: sans-serif;
+        font-size: 16px;
+        font-weight: 100;
+    }
+
+        .navbar-nav > li > ul > li {
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #363636;
+    }
+
+    .navbar-nav > ul > li > a :hover {
+    }
+
+    .navbar-nav > li > .dropdown-menu {
+        margin-top: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+        color: #4532BF;
+    }
+
+    .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+        color: #4532BF;
+        background-color: #fff;
+    }
+
+    .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+        color: #4532BF;
+        background-color: #fff;
+    }
+
+    .dropdown-menu .divider {
+        margin: 0px;
+    }
+
+    .dropdown-menu > li > a {
+        text-transform: capitalize;
+        padding: 10px;
+        color: #363636;
+        font-weight: 100;
+    }
+
+        .dropdown-menu > li > a:hover {
+            background: #4532BF;
+            color: #fff;
+        }
+
+    .divider-color {
+        background: #4532BF;
+        height: 2px;
+    }
+
+    html {
+        overflow-y: scroll;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: black;
+    }
+
+
+
+    .navbar-default .navbar-toggle {
+        border-color: #4532BF;
+    }
+
+    .navbar-default .navbar-toggle {
+        background-color: #fff;
+    }
+
+        .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+            background-color: #4532BF;
+        }
+
+    @@media (max-width:767px) {
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus, .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+            color: #fff;
+            background-color: #4532BF;
+        }
+
+        .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+            color: #4532BF;
+        }
+
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+            color: #363636;
+        }
+
+        .navbar-brand {
+            float: left;
+            height: 50px;
+            padding: 11px 15px;
+            line-height: 20px;
+        }
+
+        .navbar-default {
+            background: #fff;
+            border: none;
+            border-radius: 0px;
+            padding: 20px 10px 20px;
+            margin-bottom: 0px;
+            text-transform: capitalize;
+            font-size: 14px;
+        }
+
+            .navbar-default .navbar-nav > li {
+                background: #fff;
+            }
+
+                .navbar-default .navbar-nav > li > ul {
+                    background: #fff;
+                }
+
+
+
+        .navbar-header {
+            font-family: sans-serif;
+            font-size: 18px;
+            font-weight: 100;
+        }
+
+        navbar-default .navbar-header .navbar-brand {
+            color: #363636;
+        }
+
+
+        .navbar-nav > li {
+            font-family: sans-serif;
+            font-size: 16px;
+            font-weight: 100;
+        }
+
+            .navbar-nav > li > ul > li {
+                font-family: sans-serif;
+                font-size: 14px;
+            }
+
+        .navbar-default .navbar-nav > li > a {
+            color: #363636;
+        }
+
+        .navbar-nav > li > .dropdown-menu {
+            margin-top: 20px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+            color: #4532BF;
+        }
+
+        .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+            color: #4532BF;
+            background-color: #fff;
+        }
+
+        .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+            color: #4532BF;
+            background-color: #fff;
+        }
+
+        .dropdown-menu .divider {
+            margin: 0px;
+        }
+
+        .dropdown-menu > li > a {
+            text-transform: capitalize;
+            padding: 10px;
+            color: #363636;
+            font-weight: 100;
+        }
+
+            .dropdown-menu > li > a:hover {
+                background: #4532BF;
+                color: #fff;
+            }
+
+        .divider-color {
+            background: #4532BF;
+            height: 2px;
+        }
+
+        html {
+            overflow-y: scroll;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: black;
+        }
+
+
+        .navbar-default .navbar-toggle {
+            border-color: #4532BF;
+        }
+
+        .navbar-default .navbar-toggle {
+            background-color: #fff;
+        }
+
+            .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+                background-color: #4532BF;
+            }
+    }
+</style>

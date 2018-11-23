@@ -1,0 +1,62 @@
+﻿
+@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+<link href="/file/bcms-installation/Content/Styles/css/bootstrap.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/colors.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/style.css" rel="stylesheet" />
+
+@if (Model != null && Model.Options != null)
+{
+    string guid = Guid.NewGuid().ToString();
+    string objId = "contact" + guid;
+    string bgImageUrl = null;
+    string bgSize = null, leftContent = null;
+    string paddingBottom = null, buttonMargin = null, fontcolor = null, buttonCaption = null;
+    foreach (var options in Model.Options)
+    {
+        if (options.Key == "backgroundImage")
+        {
+            bgImageUrl = options.Value;
+        }
+        else if (options.Key == "bgSize")
+        {
+            bgSize = options.Value;
+        }
+        else if (options.Key == "paddingBottom")
+        {
+            paddingBottom = options.Value;
+        }
+        else if (options.Key == "fontcolor")
+        {
+            fontcolor = options.Value;
+        }
+        else if (options.Key == "buttonMargin")
+        {
+            buttonMargin = @options.Value;
+        }
+        else if (options.Key == "buttonCaption")
+        {
+            buttonCaption = @options.Value;
+        }
+        else if (options.Key == "leftContent")
+        {
+            leftContent = @options.Value;
+        }
+    }
+
+
+
+    <div>
+        <section id="@objId" class="section-whitebg" style="background:url(@bgImageUrl);background-size:@bgSize;padding-bottom:@paddingBottom">
+            <div class="container">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="color:@fontcolor">
+                    @Html.Raw(@leftContent)
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="margin-top:@buttonMargin;">
+                    <a href="#" class="btn btn-primary">@buttonCaption</a>
+                </div>
+            </div>
+        </section>
+    </div>
+}

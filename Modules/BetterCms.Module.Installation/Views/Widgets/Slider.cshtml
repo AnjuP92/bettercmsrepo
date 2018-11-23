@@ -1,0 +1,235 @@
+﻿
+
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+@{
+    ViewBag.Title = "Slider";
+}
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" />
+<link rel="stylesheet" href="/file/bcms-installation/Content/Styles/animate.css">
+
+
+@if (Model != null && Model.Options != null)
+{
+    RenderWidgetViewModel.SliderRootObject robj = null;
+    string sliderWidgetHeight = "400";
+    string sliderWidgetHeightPx = "400px";
+    string guidSliderStr = Guid.NewGuid().ToString();
+    foreach (var option in Model.Options)
+    {
+        string slidertext = string.Empty;
+        if (@option.Key == "itemcount")
+        {
+            <script>
+                var itemcount = '@option.Value';
+            </script>
+        }
+        else if (@option.Key == "json")
+        {
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.SliderRootObject>(@option.Value);
+        }
+        else if (@option.Key == "height")
+        {
+            sliderWidgetHeight = @option.Value;
+            sliderWidgetHeightPx = @option.Value + "px";
+        }
+    }
+    if (robj != null)
+    {
+        if (robj.sliderhtml != null && robj.sliderhtml.Count > 0)
+        {
+            @*<div id="mycarousel" class="slide carousel @guidSliderStr">*@
+            @*<div id="@guidSliderStr">*@
+                <div id="@guidSliderStr" xclass="slide @guidSliderStr">
+                    <div id="myCarousel" class="slide myCarousel" style="position:relative;">
+                        <div class="carousel-inner" role="listbox">
+
+                            @foreach (var obj2 in robj.sliderhtml)
+                    {
+
+                                @*<div class="item" style="height:@robj.Sliderheight!important;">*@
+                                <div class="item" style="height:@sliderWidgetHeightPx!important;">
+                                    <img src="@obj2.sliderimage" style="width:100%;" />
+                                    @if (!string.IsNullOrWhiteSpace(obj2.slidervideo))
+                            {
+                                        <video muted id="video" data-interval="19000" preload="none" class="video">
+                                            <source src=@obj2.slidervideo type="video/mp4">
+
+                                        </video>
+                            }
+
+                                    <div class="animated zoomIn center circle">
+                                        <h1 class="div-header">@obj2.slidertext</h1>
+                                        <a class="animated zoomIn div-a" href="@obj2.href" target="_blank" style="background-color:@obj2.buttoncolor;border-color:@obj2.bordercolor; ">@obj2.buttontext</a>
+                                    </div>
+                                </div>
+                    }
+                        </div>
+
+                        <a class="left carousel-control" xhref="#myCarousel" role="button" data-slide="prev" style="height:@sliderWidgetHeightPx!important;">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="border-radius:50%;position:absolute;z-index:20;color:#27a8b4;width: 50px;height: 50px;padding: 10px;">
+                            </span>
+
+                        </a>
+                        <a class="right carousel-control" xhref="#myCarousel" role="button" data-slide="next" style="height:@sliderWidgetHeightPx!important;">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="border-radius:50%;position:absolute;z-index:20;color:#27a8b4;width: 50px;height: 50px;padding: 10px;">
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            @*</div>*@
+            <script>
+                var index = 0;
+                jQuery(document).ready(function ($) {
+                    $('#@guidSliderStr #myCarousel ol li:first-child').addClass('active');
+                    $('#@guidSliderStr #myCarousel div.item:first-child').addClass('active');
+                    //$('.@guidSliderStr').carousel({
+                    $('.@guidSliderStr .myCarousel').carousel({
+                        interval: 19000,
+                        pause: "false"
+                    });
+                    setTimeout(function () {
+
+                        if ($('#@guidSliderStr #myCarousel div.item:first-child').children().find('video') != null) {
+                            var videoCnt = $(".video").length;
+                            if(videoCnt >0)
+                                $(".video:first")[0].play();
+                        }
+                    }, 3000);
+                    $('.@guidSliderStr .myCarousel').on('slid.bs.carousel', function (e) {
+                        setTimeout(function () {
+                            if ($('.@guidSliderStr  div.active').find('video').length > 0) {
+                                $('.@guidSliderStr  div.active').find('video')[0].play();
+                            }
+                        }, 3000);
+                    });
+
+                    var $item = $('.@guidSliderStr .item');
+                    //var $wHeight = '400px';sliderWidgetHeight
+                    var $wHeight = @sliderWidgetHeight +"px";
+                    $item.eq(0).addClass('active');
+                    $item.height($wHeight);
+                    $item.addClass('full-screen');
+
+                    $('.@guidSliderStr .myCarousel img').each(function () {
+                        var $src = $(this).attr('src');
+                        var $color = $(this).attr('data-color');
+                        $(this).parent().css({
+                            'background-image': 'url(' + $src + ')',
+                            'background-color': $color
+                        });
+                        $(this).remove();
+                    });
+
+                    $(window).on('resize', function () {
+                        $item.height($wHeight);
+                    });
+
+                    $('video').on('ended', function () {
+                        $('.@guidSliderStr .myCarousel').carousel('next');
+                    });
+                    if (typeof itemcount != 'undefined' && parseInt(itemcount) > 0) {
+                        $('#@guidSliderStr #myCarousel .full-screen').slice(parseInt(itemcount)).remove();
+                    }
+
+                    // Enable Carousel Controls
+                    $("#@guidSliderStr .left").click(function () {
+                        $("#@guidSliderStr #myCarousel").carousel("prev");
+                    });
+                    // Enable Carousel Controls
+                    $("#@guidSliderStr .right").click(function () {
+                        $("#@guidSliderStr #myCarousel").carousel("next");
+                    });
+                });
+            </script>
+
+            <style type="text/css">
+                video, img {
+                    object-fit: inherit;
+                    width: 100% !important;
+                    height: 100% !important;
+                    object-fit: cover !important;
+                }
+
+                h3 {
+                    display: inline-block;
+                    padding: 10px;
+                    background: #B9121B;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                }
+
+                .full-screen {
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+
+                .full-video {
+                    position: absolute;
+                    left: 0px;
+                    z-index: 1;
+                    width: 100%;
+                    height: 100%;
+                    -webkit-transition: left 1s;
+                    -moz-transition: left 1s;
+                    transition: left 1s;
+                }
+
+                    .full-video iframe {
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                div.item {
+                    position: relative;
+                }
+
+                    div.item div.center {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 90%;
+                        height: 120%;
+                        text-align: center;
+                        padding-top: 5%;
+                        animation-delay: 0s;
+                    }
+
+                .div-header {
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    text-align: center;
+                    /*margin-bottom: 8%;*/
+                    margin-bottom:30px;
+                }
+
+                div.item div.circle {
+                    border-radius: 50%;
+                    background: rgba(0, 0, 0, 0.05);
+                    letter-spacing: 1px;
+                }
+
+                .div-a {
+                    color: white;
+                    padding: 12px 26px;
+                    text-decoration: none;
+                    border: 1px solid;
+                    font-weight: bold;
+                    animation-delay: 2s;
+                }
+
+                    .div-a:hover {
+                        color: white;
+                        text-decoration: none;
+                    }
+
+                a.carousel-control span.glyphicon {
+                    position: absolute;
+                }
+            </style>
+        }
+    }
+}

@@ -1,0 +1,142 @@
+﻿
+@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+<link href="/file/bcms-installation/Content/Styles/css/bootstrap.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/colors.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/style.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/jetmenu.css" rel="stylesheet" />
+
+@if (Model != null && Model.Options != null)
+{
+    string guid = Guid.NewGuid().ToString();
+    string objId = "menuheader" + guid;
+    string menu_addressIcon = null;
+    string menu_timeIcon = null, menu_phoneIcon = null;
+    string menu_addressText = null;
+    string menu_timeText = null, menu_phoneText = null, linksHtml=null;
+    string paddingRight = null, clickonLogo_redirecttopage = null, fontcolor = null, menuLogo = null;
+    foreach (var options in Model.Options)
+    {
+        if (options.Key == "menu_addressIcon")
+        {
+            menu_addressIcon = options.Value;
+        }
+        else if (options.Key == "menu_timeIcon")
+        {
+            menu_timeIcon = options.Value;
+        }
+        else if (options.Key == "menu_phoneIcon")
+        {
+            menu_phoneIcon = options.Value;
+        }
+        else if (options.Key == "fontcolor")
+        {
+            fontcolor = options.Value;
+        }
+        else if (options.Key == "clickonLogo_redirecttopage")
+        {
+            clickonLogo_redirecttopage = @options.Value;
+        }
+        else if (options.Key == "menuLogo")
+        {
+            menuLogo = @options.Value;
+        }
+        else if (options.Key == "menu_addressText")
+        {
+            menu_addressText = options.Value;
+        }
+        else if (options.Key == "menu_timeText")
+        {
+            menu_timeText = options.Value;
+        }
+        else if (options.Key == "menu_phoneText")
+        {
+            menu_phoneText = options.Value;
+        }
+        else if (options.Key == "linksHtml")
+        {
+            linksHtml = options.Value;
+        }
+    }
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <div class="topbar">
+            <div class="container">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="callus">
+                        <p>
+                            <img src="@menu_addressIcon" style="padding-right:@paddingRight;display:inline-block;" />
+                            <span>@menu_addressText</span>
+
+                        </p>
+                    </div><!-- end callus -->
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="callus">
+                        <p>
+                            <img src="@menu_timeIcon" style="padding-right:@paddingRight;display:inline-block;" />
+                            <span>@menu_timeText</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="callus">
+                        <p>
+                            <img src="@menu_phoneIcon" style="padding-right:@paddingRight;display:inline-block;" />
+                            <span>@menu_phoneText</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <header class="header-wrapper">
+            <div class="container">
+                <div class="site-header clearfix">
+                    <div id="nav">
+                        <div class="col-lg-3 col-md-3 col-sm-12 title-area pull-left">
+                            <div class="site-title" id="title">
+                                <a href="@clickonLogo_redirecttopage" title="">
+                                    <img style="padding:10px;" src="@menuLogo" alt="">
+                                </a>
+                            </div><!-- site title -->
+                        </div><!-- title area -->
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12" style="margin-top:30px">
+                            <div class="container clearfix">
+                                <ul id="jetmenu" class="jetmenu blue">
+                                    @*<li class="active"><a style="@fontcolor" href="#">HOME</a></li>
+                                    <li><a style="@fontcolor" href="#">PROFILE</a></li>
+                                    <li><a style="@fontcolor" href="#">About Rheumatic Diseases</a></li>
+                                    <li><a style="@fontcolor" href="#">Contact Us</a></li>*@
+
+                                    @Html.Raw(@linksHtml)
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <script src="/file/bcms-installation/Scripts/widget/jetmenu.js"></script>
+    <script src="/file/bcms-installation/Scripts/widget/application.js"></script>
+    <script src="/file/bcms-installation/Scripts/widget/jquery.js"></script>
+    <script src="/file/bcms-installation/Scripts/widget/bootstrap.js"></script>
+    <script src="/file/bcms-installation/Scripts/widget/jquery.simple-text-rotator.js"></script>
+    <script src="/file/bcms-installation/Scripts/widget/jquery.unveilEffects.js"></script>
+</body>
+
+</html>
+}

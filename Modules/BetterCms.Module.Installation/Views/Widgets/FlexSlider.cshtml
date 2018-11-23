@@ -1,0 +1,66 @@
+﻿
+@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+<link href="/file/bcms-installation/Content/Styles/css/bootstrap.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/colors.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/style.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/flexslider.css" rel="stylesheet" />
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <section class="section-slider">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <img src="/uploads/widgetimage/flexslider_banner1.png" alt="">
+                        <div class="desc">
+                            <h2 class="bigtitle">The Best Hospital With All Features You Want</h2>
+                            <span class="text">Extraordinary People Providing Extraordinary Care</span>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/uploads/widgetimage/flexslider_banner2.png" alt="">
+                        <div class="desc">
+                            <h2 class="bigtitle">Our Team - a Collaboration of Experts </h2>
+                            <span class="text">A Team of Professionals that you can trust</span>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/uploads/widgetimage/flexslider_banner3.png" alt="">
+                        <div class="desc">
+                            <h2 class="bigtitle">Better Health, Better Care, Better Value</h2>
+                            <span class="text">A Journey Toward Perfection</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <script src="/file/bcms-installation/Scripts/widget/jquery.flexslider.js"></script>
+            <script src="/file/bcms-installation/Scripts/widget/jquery.js"></script>
+            <script src="/file/bcms-installation/Scripts/widget/bootstrap.js"></script>
+            <script src="/file/bcms-installation/Scripts/widget/jquery.isotope.min.js"></script>
+            <script type="text/javascript">
+                $(function () {
+                    SyntaxHighlighter.all();
+                });
+                $(window).load(function () {
+                    $('.flexslider').flexslider({
+                        animation: "fade",
+                        controlNav: false,
+                        start: function (slider) {
+                            $('body').removeClass('loading');
+                        }
+                    });
+                });
+            </script>
+        </section><!-- end section-slider -->
+    </div>
+</body>
+</html>

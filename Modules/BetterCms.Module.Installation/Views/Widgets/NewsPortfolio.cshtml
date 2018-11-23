@@ -1,0 +1,221 @@
+﻿
+@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+<link href="/file/bcms-installation/Content/Styles/css/bootstrap.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/colors.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/style.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/hover_pack.css" rel="stylesheet" />
+<script src="/file/bcms-installation/Scripts/Js/isotope.min.js"></script>
+<link href="/file/bcms-installation/Content/Styles/animate.css" rel="stylesheet" />
+
+
+@if (Model != null && Model.Options != null)
+{
+    string guid = Guid.NewGuid().ToString();
+    string objId = "newsportfolio" + guid;
+    string headingText = null;
+    string allButtonCaption = null, btn2_Button2Caption = null;
+    string btn3_Button3Caption = null, btn4_Button4Caption = null, fontcolor = null, buttonCaption = null, leftContent=null;
+
+    RenderWidgetViewModel.NewsportfolioRootObject robj = null;
+
+    foreach (var options in Model.Options)
+    {
+        if (options.Key == "headingText")
+        {
+            headingText = options.Value;
+        }
+        else if (options.Key == "allButtonCaption")
+        {
+            allButtonCaption = options.Value;
+        }
+        else if (options.Key == "leftContent")
+        {
+            leftContent = @options.Value;
+        }
+        else if (options.Key == "jsonFile")
+        {
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.NewsportfolioRootObject>(options.Value);
+        }
+    }
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <section id="@objId" class="section-portfolio">
+            <div class="container">
+                <div class="fullwidth-post-wrapper col-lg-12">
+                    <div>
+
+                        @Html.Raw(@headingText)
+
+                        @*<div style="border-left:2px solid black;margin-left:40%;">
+                            <div style="padding-left:10px;">
+                                <span style="color:#2b2b2b;font-size:12px;">What others say about us</span>
+
+                                <h2 style="color:#11b3fe;">NEWS &amp; EVENTS</h2>
+                            </div>
+                        </div>
+                        <div style="text-align:center">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec leo leo, posuere nec odio in, facilisis maximus tellus. Phasellus in nisi sit amet quam.</p>
+                        </div>*@
+
+                    </div>
+                    <nav class="portfolio-filter clearfix">
+                        <ul>
+                            <li><a href="#" class="btn btn-primary btn-sm" data-filter="*">@allButtonCaption </a></li>
+                            @*<li><a href="#" class="btn btn-primary btn-sm" data-filter=".mockups">@btn2_Button2Caption</a></li>
+                            <li><a href="#" class="btn btn-primary btn-sm" data-filter=".graphic-design">@btn3_Button3Caption </a></li>
+                            <li><a href="#" class="btn btn-primary btn-sm" data-filter=".web-design">@btn4_Button4Caption </a></li>*@
+                            @if (robj != null)
+                            {
+                                if (robj.newsportfolio_item != null && robj.newsportfolio_item.Count > 0)
+                                {
+                                    foreach (var opt in robj.newsportfolio_item)
+                                    {
+                                        <li><a href="#" class="btn btn-primary btn-sm" data-filter=".@opt.filterclassname">@opt.filterbuttonname</a></li>
+                                    }
+                                }
+                            }
+                        </ul>
+                    </nav>
+
+                    <div class="row portfolio_wrapper clearfix">
+
+                        @if (robj != null)
+                        {
+                            if (robj.newsportfolio_item != null && robj.newsportfolio_item.Count > 0)
+                            {
+
+                                foreach (var opt in robj.newsportfolio_item)
+                                {
+                                    <div class="item col-lg-4 col-md-4 col-sm-6 col-xs-12 @opt.filterclassname">
+                                        <div class="b-link-flow b-animate-go clearfix" style="max-width: 336px;width: 90.7%;">
+                                            <a href="#" class="b-link-fade b-animate-go">
+                                                <img src="@opt.imageurl" alt="">
+                                            </a>
+                                            <div class="b-wrapper">
+                                                <h2 class="portfolio-title b-from-left b-animate b-delay02">@opt.imagecaption</h2>
+                                            </div>
+
+                                        </div>
+                                        <div style="max-width:336px;min-height:120px;width:90.7%;background-color:@opt.backgroundcolor;padding:10px;color:white;padding-bottom:30px;">@opt.imagedescrip</div>	<!-- animate -->
+                                    </div><!-- item -->
+                                }
+                            }
+                        }
+
+
+                        @*<div class="item col-lg-4 col-md-4 col-sm-6 col-xs-12 mockups">
+                            <div class="b-link-flow b-animate-go clearfix">
+                                <a href="#" class="b-link-fade b-animate-go">
+                                    <img src="/uploads/widgetimage/newsportfolioevent1.png" alt="">
+                                </a>
+                                <div class="b-wrapper">
+
+                                </div>
+
+                            </div>
+                            <div style="width:90.7%;background-color:#e09719;padding:10px;color:white;padding-bottom:30px;">
+                                Dr Vinod Ravindran presented a scientific paper on SLE at the Excellence in Rheumatology Conference (January 2012) at Madrid, Spain.
+                            </div><!-- animate -->
+                        </div><!-- item -->
+
+                        <div class="item col-lg-4 col-md-4 col-sm-6 col-xs-12 graphic-design mockups">
+                            <div class="b-link-flow b-animate-go clearfix">
+                                <a href="#" class="b-link-fade b-animate-go">
+                                    <img src="/uploads/widgetimage/newsportfolioevent2.png" alt="">
+                                </a>
+                                <div class="b-wrapper">
+                                    <h2 class="portfolio-title b-from-left b-animate b-delay02">asaa</h2>
+                                </div>
+
+                            </div>
+                            <div style="width:90.7%;background-color:#58a8af;padding:10px;color:white;padding-bottom:30px;">Dr Vinod Ravindran delivering the “State of the art” lecture at the annual conference of Indian Rheumatology Association at Vellore (December 2011).</div>	<!-- animate -->
+                        </div><!-- item -->
+
+                        <div class="item col-lg-4 col-md-4 col-sm-6 col-xs-12 graphic-design web-design mockups">
+                            <div class="b-link-flow b-animate-go clearfix">
+                                <a href="#" class="b-link-fade b-animate-go">
+                                    <img src="/uploads/widgetimage/newsportfolioevent3.png" alt="">
+                                </a>
+                                <div class="b-wrapper">
+                                    <h2 class="portfolio-title b-from-left b-animate b-delay02">dios</h2>
+                                </div>
+
+                            </div>
+                            <div style="width:90.7%;background-color:#e36d75;padding:10px;color:white;padding-bottom:30px;">Dr Vinod Ravindran presented a scientific paper on Chikngunya Arthritis at EULAR Conference (May 2011) in London, UK.</div><!-- animate -->
+                        </div>*@<!-- item -->
+
+                    </div><!-- end portfolio_wrapper -->
+
+
+                </div><!-- fullwidth-post-wrapper -->
+            </div><!-- end container -->
+        </section>
+        <script>
+	// Portfolio
+	(function($) {
+		"use strict";
+		var $container = $('#@objId').find('.portfolio_wrapper'),
+			$items = $container.find('.item'),
+			portfolioLayout = 'fitRows';
+
+			if( $container.hasClass('portfolio-centered') ) {
+				portfolioLayout = 'masonry';
+			}
+
+			$container.isotope({
+				filter: '*',
+				animationEngine: 'best-available',
+				layoutMode: portfolioLayout,
+				animationOptions: {
+				duration: 750,
+				easing: 'linear',
+				queue: false
+			},
+			masonry: {
+			}
+			}, refreshWaypoints());
+
+			function refreshWaypoints() {
+				setTimeout(function() {
+				}, 1000);
+			}
+
+			$('#@objId').find('nav.portfolio-filter ul a').on('click', function() {
+					var selector = $(this).attr('data-filter');
+					$container.isotope({ filter: selector }, refreshWaypoints());
+					$('#@objId').find('nav.portfolio-filter ul a').removeClass('active');
+					$(this).addClass('active');
+					return false;
+			});
+
+
+			function setPortfolio() {
+				setColumns();
+				$container.isotope('reLayout');
+			}
+
+			$container.imagesLoaded(function () {
+				setPortfolio();
+			});
+
+			$(window).on('resize', function () {
+			setPortfolio();
+		});
+	})(jQuery);
+        </script>
+    </div>
+</body>
+</html>
+
+}

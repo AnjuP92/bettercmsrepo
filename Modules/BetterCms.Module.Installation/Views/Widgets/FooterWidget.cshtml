@@ -1,0 +1,179 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+
+
+
+<link rel="stylesheet" href="/file/bcms-installation/content/styles/newstyle.css" />
+
+ 
+@if (Model != null)
+{
+    int objCount = 0;
+    if (Model.Options != null)
+    {
+        foreach (var option in Model.Options)
+        {
+            string logomaintext = string.Empty;
+            string logosubtext =string.Empty;
+            string linktext =string.Empty;
+            string linkurl=string.Empty;
+            string contact =string.Empty;
+            string email =string.Empty;
+            string address =string.Empty;                              
+            string phoneno =string.Empty;
+            string newsletter =string.Empty;
+            string count =string.Empty;
+            string bgimage =string.Empty;
+            string bgcolor =string.Empty;
+            if (@option.Key == "JsonFile")
+            {
+               foreach(var opt in Model.Options)
+               {
+                   if (@opt.Key == "BackgroundImage")
+                   {
+                       bgimage = @opt.Value;
+                   }
+                   else if (@opt.Key == "BackgroundColor")
+                   {
+                       bgcolor = @opt.Value;
+                   }
+               }
+                RenderWidgetViewModel.FooterRootObject robj = null;
+                robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.FooterRootObject>(@option.Value);
+                if (robj != null && robj.Contact != null) { objCount++; }
+                if (robj != null && robj.Links != null) { objCount++; }
+                if (robj != null && robj.logo != null) { objCount++; }
+                if (robj != null && robj.Newletter != null) { objCount++; }
+                
+               if (robj != null)
+                 {
+
+               
+                         <div class="footer" style="background-image: url(@bgimage);background-color:@bgcolor;">
+                             
+                             <div class="footerwidgetcontainer container" >
+                                 <div class="row">
+
+                                     @if (robj.logo != null && robj.logo.Count > 0)
+                                     {
+                                         <div class="footersection">
+                                             @foreach (var obj in robj.logo)
+                                             {
+                                                 logomaintext = obj.Maintext;
+                                                 logosubtext = obj.Subtext;
+                                                 if (logomaintext != null)
+                                                 { 
+                                                     if(logomaintext.StartsWith("http://"))
+                                                     {
+                                                     <div class="footer_first-section" style="margin-top:20px;">
+                                                         <img class ="footer_logo" src=@logomaintext />
+
+                                                     </div>
+                                                     }
+                                                     else
+                                                     {
+                                                         <div class="footer_first-section" style="margin-top:20px;">
+                                                         <p>
+                                                             <a class="footer_maintext" style="color: #ffffff; text-decoration: none; font-weight: 800; font-style: normal; font-size:40px;">@logomaintext</a>
+                                                         </p>
+
+                                                         </div>
+                                                         
+                                                     }
+                                                 }
+                                                 if (logosubtext != null)
+                                                 {
+                                                    <div class="footer_first-section" style="">
+                                                        <p>
+                                                            <a class="footer_subtext" style="color: #ffffff;">@logosubtext</a>
+                                                        </p>
+                                                    </div>
+                                                 }
+
+                                             }
+                                         </div>
+                                     }
+                                     @if (robj.Links != null && robj.Links.Count > 0)
+                                     {
+                                         <div class="footersection">
+                                             <div class="footer_linktext" style=""> 
+                                                <p>
+                                                  @foreach (var obj in robj.Links)
+                                                    {
+                                                      linktext = obj.text;
+                                                      linkurl = obj.url;
+                                                      <a href=@linkurl>@linktext</a>
+                                                      <br />
+                                                      
+                                                    }
+                                                </p>
+                                             </div>
+                                          </div>                                          
+                                                                                 
+                                     }
+                                     @if (robj.Contact != null && robj.Contact.Count > 0)
+                                     {
+                                         <div class="footersection">
+                                             @foreach (var obj in robj.Contact)
+                                             {
+                                                 email = obj.Emailid;
+                                                 address = obj.Address;
+                                                 phoneno = obj.Phoneno;
+                                                 <div class="footer_contactdetails">
+                                                     <p>@email</p>
+                                                     <p>@phoneno</p>  
+                                                     <p>@address</p>                                                                                                         
+                                                     
+                                                 </div>
+                                             }
+                                         </div>
+                                     }
+                                     @if (robj.Newletter != null && robj.Newletter.Count > 0)
+                                     {
+                                         <div class="footersection">
+                                             @foreach (var obj in robj.Newletter)
+                                             {
+                                                 newsletter = obj.text;
+                                                 <div>
+                                                     <p style="color: #ced2d5;text-align:left">@newsletter</p>
+                                                 </div>
+                                             <input type="text" class="footer_emailtextbox" value="Email *" onblur="if(this.value == ''){ this.value = 'Email *'; }"
+                                                    onfocus="if(this.value == 'Email *'){ this.value = ''; }"/>
+                                                 <div class="footersubscribe">
+                                                     <div>
+                                                         <a href="#"><span>SUBSCRIBE</span></a>
+                                                     </div>
+
+                                                 </div>
+                                             }
+                                         </div>
+                                     }
+
+                                 </div>
+                             </div>                             
+                         </div>                
+
+
+              }
+                <input type="hidden" id="hiddenbox" value=@objCount />
+            }
+        }
+    }
+
+
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        
+
+        var propertyCount = $("#hiddenbox").val();        
+        var value = 12 / propertyCount;        
+        $(".footersection").each(function () {
+            $(this).addClass("col-sm-" + value);
+
+        });
+    });
+</script>

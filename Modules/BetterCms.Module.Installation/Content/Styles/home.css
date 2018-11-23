@@ -1,0 +1,256 @@
+﻿/* POP UP */
+#popup {
+z-index:500;
+position:fixed;
+overflow:auto;
+display: block;
+}
+
+div#popupContact {
+position:fixed;
+display: block;
+right: 0;
+bottom: -100%;
+z-index:99999;
+font-family:Source Sans Pro;
+overflow:none;
+}
+#popup1 {
+
+opacity:0;
+z-index:1;
+position:fixed;
+xbackground-color:#313131;
+overflow:auto;
+transition : all 0.4s ease;
+-webkit-transition: all 0.4s ease;
+-moz-transition: all 0.4s ease;
+}
+
+#thanks{
+display:none;
+}
+
+div#popupContact1 {
+background-image: url("../images/form.png");
+position:fixed;
+right: 2%;
+bottom:0;
+font-family:Source Sans Pro;
+height: 460px;
+width: 330px;
+overflow:none;
+display: none;
+z-index:500000;
+transition: all 0.3s ;
+-webkit-transition: all 0.3s ;
+
+}
+div#popupContact1 form{margin:60px 40px 10px 40px;}
+img#close {
+position:absolute;
+right:-14px;
+top:0;
+cursor:pointer
+}
+
+img.close
+{
+position:absolute;
+right:0;
+top:-14px;
+cursor:pointer
+}
+
+
+
+}
+#box
+{
+xbackground: -webkit-linear-gradient(#8dca41, #2bb6a3); /* For Safari 5.1 to 6.0 */
+xbackground: -o-linear-gradient(#8dca41, #2bb6a3); /* For Opera 11.1 to 12.0 */
+xbackground: -moz-linear-gradient(#8dca41, #2bb6a3); /* For Firefox 3.6 to 15 */
+xbackground: linear-gradient(#8dca41, #2bb6a3); /* Standard syntax (must be last) */
+xbackground-repeat: no-repeat;
+xborder-radius: 25px 25px 0px 0px;
+
+    height: 50%;
+    margin-left: auto;
+    padding-bottom: 10px;
+    width: 80%;
+    margin-right: auto;
+    margin-top: 1.5%;
+    position: relative
+	
+
+}
+#loading
+{
+	margin-left: 40%;
+	margin-top: -5px;
+	display: none;
+}
+
+#tips, #tips li{
+	margin:0;
+	padding:0;
+	list-style:none;
+	}
+#tips{
+	
+	font-size:16px;
+	line-height:120%;
+	margin-top: -15px;
+	float: left;
+
+	}
+#tips li{
+
+	padding:20px 5px 20px 20px;
+	text-align:center;	
+	background-repeat: no-repeat;
+	color:#FFF;	
+	display:none; /* hide the items at first only */
+	}
+	
+.buttonCollection
+{
+	margin-top:0;
+	margin-left:15px;
+	width: 220px;
+	float: left;
+}
+#clickbutton{  
+  float: left;
+	border:1px solid white;
+	display:table;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:arial;
+	font-size:14px;
+	padding:8px 30px 8px 16px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+
+	background-repeat: no-repeat;
+	background-position: 100px,20px;
+	
+	
+	}
+.clickButtonNo
+{
+border:1px solid white;
+	display:table;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:arial;
+	font-size:14px;
+	padding:8px 30px 8px 16px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	float: left;
+	margin-left:10px;
+	
+}
+.clickButtonNo:hover{
+background-color:white;
+	border:1px solid white;
+	color: green;	
+}	
+
+#clickbutton:hover {
+	background-color:white;
+	border:1px solid white;
+	color: green;	
+	background-position: 100px,20px;
+}
+#clickbutton:active {
+	position:relative;
+	top:1px;
+}
+
+
+.modalDialog {
+    position: fixed;   
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+.modalDialog:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.modalDialog > div {
+background-image: url("../images/form.png");
+position: relative;
+margin: 5% auto;
+ padding: 5px 0px 13px 0px;
+font-family:Source Sans Pro;
+height:450px;
+width: 330px;
+overflow:none;
+background-size:	100% 100%;
+	
+}
+.modalDialog > div  >form{margin:35px 40px 10px 40px;}
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+    background: #00d9ff;
+}
+#Name {
+	background: white url('../images/icon_name.png') no-repeat;
+	padding-left: 30px;
+	 background-position : 7px;
+	}
+	#Organization {
+	background: white url('../images/icon_orgnaization.png') left no-repeat;
+	padding-left: 30px;
+	 background-position : 7px;
+	}
+	#email {
+	background: white url('../images/icon_email.png') left no-repeat;
+	padding-left: 30px;
+	 background-position : 7px;
+	}
+	#Mobile {
+	background: white url('../images/mobile.png') left no-repeat;
+	padding-left: 30px;
+	 background-position : 7px;
+	}
+	
+#patner { 
+    position: relative; 
+    width: 196px; 
+    height: 99px; 
+}
+
+#patner > div { 
+    position: absolute;
+	padding:10px;
+}

@@ -1,0 +1,193 @@
+﻿@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+
+
+@*@if (Model != null && Model.Options != null)
+    {
+        foreach (var options in Model.Options)
+        {
+            string[] marqueeimages;
+            string bgcolor = string.Empty;
+
+            if (options.Key == "jsonFile")
+            {
+                RenderWidgetViewModel.MarqueeRootObject robj = null;
+                robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.MarqueeRootObject>(options.Value);
+
+                foreach (var opt in Model.Options)
+                {
+                    if (opt.Key == "backgroundcolor")
+                    {
+                        bgcolor = opt.Value;
+                    }
+                }
+                <div class="container">
+                    <div class="row" style="margin:0px;">
+                        <marquee onmouseover="this.stop();" onmouseout="this.start();">
+                            @if (robj != null)
+                            {
+                                if (robj.marquee != null && robj.marquee.Count > 0)
+                                {
+
+                                    foreach (var opt in robj.marquee)
+                                    {
+                                        marqueeimages = opt.marquee_images.Split(',');
+                                        for (int i = 0; i < marqueeimages.Length; i++)
+                                        {
+                                            <img src="@marqueeimages[i];" style="width:200px !important; display:inline-block;" />
+                                        }
+                                    }
+                                }
+                            }
+                        </marquee>
+                    </div>
+                </div>
+            }
+        }
+    }
+
+    <style>
+        marquee {
+            white-space:nowrap;
+        }
+    </style>*@
+
+
+@if (Model != null && Model.Options != null)
+{
+    string guid = Guid.NewGuid().ToString();
+    string objDivId = "marquee" + guid;
+    RenderWidgetViewModel.MarqueeRootObject robj = null;
+    string imgWidth = "200";
+    //string compWidth = "100%";
+
+    foreach (var options in Model.Options)
+    {
+        string bgcolor = string.Empty;
+        if (options.Key == "width")
+        {
+            <script>
+                var width = '@options.Value';
+            </script>
+            //compWidth = @options.Value + "px";
+        }
+        else if (options.Key == "speed")
+        {
+            <script>
+                var speed = '@options.Value';
+            </script>
+        }
+        else if (options.Key == "backgroundcolor")
+        {
+            <script>
+                var bgcolor = '@options.Value';
+            </script>
+        }
+        else if (options.Key == "imagewidth")
+        {
+            imgWidth = @options.Value;
+        }
+        else if (options.Key == "jsonFile")
+        {
+            robj = RenderWidgetViewModel.jsSerial.Deserialize<RenderWidgetViewModel.MarqueeRootObject>(options.Value);
+        }
+    }
+
+    
+
+    imgWidth = imgWidth + "px";
+    <div xclass="container" style="overflow:hidden; padding-left:0px; padding-right:0px; margin-left:auto; margin-right:auto;">
+        <div class="row" style="margin:0px;">
+            <div id="@objDivId" class="marquee">
+                @if (robj != null)
+                {
+                    if (robj.marquee != null && robj.marquee.Count > 0)
+                    {
+                        string[] marqueeimages;
+                        foreach (var opt in robj.marquee)
+                        {
+                            marqueeimages = opt.marquee_images.Split(',');
+                            for (int i = 0; i < marqueeimages.Length; i++)
+                            {
+                                <img src="@marqueeimages[i];" style="width:@imgWidth !important; display:inline-block;" />
+                            }
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .marquee {
+            background: #eee;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+
+    <script>
+
+        @*if (typeof width != 'undefined' && width > 200) {
+            //$('#marquee').parent().css('width', width + 'px');
+            $('#@objDivId').parent().css('width', width + 'px');
+        }*@
+
+        if (typeof width != 'undefined') {
+            var containerWidth = $('#@objDivId').parent().parent().css('width');
+            if (width > containerWidth)
+                width = containerWidth;
+            $('#@objDivId').parent().css('width', width + 'px');
+            $('#@objDivId').parent().parent().css('width', width + 'px');
+        }
+        var speed1 = 50;
+        if (typeof speed != 'undefined' && speed > 0)
+            speed1 = parseInt(speed);
+
+        if (typeof bgcolor != 'undefined')
+            //$('#marquee').css('background-color', bgcolor);
+            $('#@objDivId').css('background-color', bgcolor);
+
+        (function () {
+            function start_marquee() {
+                function go() {
+                    i = i < width ? i + step : 1;
+                    m.style.marginLeft = -i + 'px';
+                }
+                var i = 0,
+                    step = 3,
+                    space = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                //var m = document.getElementById('marquee');
+                var m = document.getElementById('@objDivId');
+                var t = m.innerHTML; //text
+                m.innerHTML = t + space;
+                m.style.position = 'absolute'; // http://stackoverflow.com/questions/2057682/determine-pixel-length-of-string-in-javascript-jquery/2057789#2057789
+                var width = (m.clientWidth + 1);
+                m.style.position = '';
+                m.innerHTML = t + space + t + space + t + space + t + space + t + space + t + space + t + space;
+                if (m.addEventListener) {
+                    m.addEventListener('mouseenter', function () {
+                        step = 0;
+                    }, false);
+                    m.addEventListener('mouseleave', function () {
+                        step = 3;
+                    }, false);
+                }
+                var x = setInterval(go, speed1);
+            }
+
+            if (window.addEventListener) {
+                window.addEventListener('load', start_marquee, false);
+            } else if (window.attachEvent) { //IE7-8
+                window.attachEvent('onload', start_marquee);
+            }
+        })();
+    </script>
+}
+
+
+
+
+
+

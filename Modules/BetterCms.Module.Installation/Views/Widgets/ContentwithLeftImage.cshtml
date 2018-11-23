@@ -1,0 +1,64 @@
+﻿
+@using BetterCms.Module.Root.Mvc.Helpers
+@using BetterCms.Module.Root.ViewModels.Cms
+@model BetterCms.Module.Root.ViewModels.Cms.RenderWidgetViewModel
+<link href="/file/bcms-installation/Content/Styles/css/bootstrap.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/colors.css" rel="stylesheet" />
+<link href="/file/bcms-installation/Content/Styles/css/style.css" rel="stylesheet" />
+
+<style>
+
+</style>
+
+
+@if (Model != null && Model.Options != null)
+{
+    string guid = Guid.NewGuid().ToString();
+    string objId = "contentwithLeftImage" + guid;
+    string leftImageSrc = null;
+    string bgSize = null;
+    string contenttext = null, bgImage = null, padding = null;
+    foreach (var options in Model.Options)
+    {
+        if (options.Key == "leftImageSrc")
+        {
+            leftImageSrc = options.Value;
+        }
+        else if (options.Key == "bgSize")
+        {
+            bgSize = options.Value;
+        }
+        else if (options.Key == "backgroundImage")
+        {
+            bgImage = options.Value;
+        }
+        else if (options.Key == "padding")
+        {
+            padding = options.Value;
+        }
+        else if (options.Key == "contenttext")
+        {
+            contenttext = @options.Value;
+        }
+    }
+
+
+
+
+    <div>
+        <section class="section-whitebg" style="background:url(@bgImage);background-size:@bgSize;">
+            <div class="container">
+                <div id="@objId" class="general_wrapper clearfix">
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                        <div class="entry" data-effect="slide-right"><img class="img-responsive" alt="Web Design Service" src="@leftImageSrc"></div>
+                    </div><!-- end col-lg-6 -->
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                        @Html.Raw(@contenttext)
+                    </div><!-- end col-lg-6 -->
+
+                </div><!-- general -->
+            </div><!-- end container -->
+        </section><!-- end section-whitebg -->	
+    </div>    
+
+}
